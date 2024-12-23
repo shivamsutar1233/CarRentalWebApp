@@ -12,7 +12,7 @@ import {
 import { NavLink } from "react-router";
 import { Fragment, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { useDispatch, useSelector } from "react-redux";
 import { clearGlobalState } from "../../redux/slice/GlobalStateSlice";
@@ -120,13 +120,13 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const getApplicationThemeComponent = () => {
     return (
       <IconButton onClick={() => handleApplicationTheme()}>
-        {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+        {isDarkMode ? <Brightness4Icon /> : <LightModeIcon />}
       </IconButton>
     );
   };
 
   return (
-    <section className=" flex justify-between items-center px-6 py-4 z-10 ">
+    <section className=" flex justify-between items-center px-6 py-4 z-10 relative">
       <section className=" text-2xl font-bold cursor-pointer leading-none  ">
         Rentals<span className=" text-cyan-800 dark:text-yellow-400">.</span>
       </section>
