@@ -25,7 +25,7 @@ function Home() {
   ];
   return (
     <section>
-      <section className=" absolute top-0 -z-10">
+      <section className=" absolute top-0 ">
         <StyledCarousel data={images} />
       </section>
     </section>
