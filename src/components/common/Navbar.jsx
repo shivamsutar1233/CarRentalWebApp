@@ -6,6 +6,7 @@ import {
   List,
   ListItem,
   SwipeableDrawer,
+  Typography,
   useColorScheme,
 } from "@mui/material";
 import { NavLink } from "react-router";
@@ -115,6 +116,15 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     }
     setIsDarkMode((prev) => !prev);
   };
+
+  const getApplicationThemeComponent = () => {
+    return (
+      <IconButton onClick={() => handleApplicationTheme()}>
+        {isDarkMode ? <DarkModeIcon /> : <LightModeIcon />}
+      </IconButton>
+    );
+  };
+
   return (
     <section className=" flex justify-between items-center px-6 py-4 ">
       <section className=" text-2xl font-bold cursor-pointer leading-none  ">
@@ -154,13 +164,9 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
             </NavLink>
           )}
         </section>
-        <IconButton onClick={() => handleApplicationTheme()}>
-          {isDarkMode ? (
-            <DarkModeIcon className=" dark:fill-slate-400" />
-          ) : (
-            <LightModeIcon />
-          )}
-        </IconButton>
+        <section className="hidden md:block">
+          {getApplicationThemeComponent()}
+        </section>
         <section className="block md:hidden">
           <IconButton onClick={() => setShowSideBar(true)}>
             <MenuIcon />
@@ -174,6 +180,13 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
             className=""
           >
             <List className="block w-72 md:hidden">
+              <section className="flex items-center p-2">
+                {getApplicationThemeComponent()}{" "}
+                <Typography variant="p">
+                  {isDarkMode ? "Dark theme" : "Light theme"}
+                </Typography>
+              </section>
+              {<Divider />}
               {navLinksComponent()}
               {isLoggedIn && <Divider />}
               {isLoggedIn && protectedNavLinksComponent()}
