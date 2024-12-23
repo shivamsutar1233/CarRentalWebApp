@@ -2,8 +2,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppRoutes from "./AppRoutes";
 import Navbar from "./components/common/Navbar";
 import { useState } from "react";
-import { CssBaseline } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { CssBaseline } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -24,7 +24,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <section className="min-h-screen">
+      <section className="min-h-screen relative">
         <Navbar setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
         <AppRoutes />
       </section>
