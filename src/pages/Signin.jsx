@@ -1,10 +1,9 @@
-import { TextField } from "@mui/material";
+import { Link, TextField } from "@mui/material";
 import { useMemo, useState } from "react";
-import { StyledLoadingButton } from "../components/common/LoadingButton";
 import { useLoginUserMutation } from "../redux/api/IdentityApi";
-import { NavLink } from "react-router";
 import { useDispatch } from "react-redux";
 import { setIsLoggedIn } from "../redux/slice/GlobalStateSlice";
+import { LoadingButton } from "@mui/lab";
 
 const Signin = () => {
   const [loginUser, { isLoading, data, error }] = useLoginUserMutation();
@@ -62,18 +61,21 @@ const Signin = () => {
               setFormState((prev) => ({ ...prev, password: e.target.value }))
             }
           />
-          <StyledLoadingButton
+          <LoadingButton
             variant={"contained"}
             size={"large"}
             loading={isLoading}
             type="submit"
           >
             Signin
-          </StyledLoadingButton>
+          </LoadingButton>
         </form>
       </section>
       <section className="flex gap-2 min-w-96">
-        Don't have an account? <NavLink to={"/Signup"}>Signup</NavLink>
+        Don't have an account?{" "}
+        <Link href={"/Signup"} underline="hover">
+          Signup
+        </Link>
       </section>
     </section>
   );

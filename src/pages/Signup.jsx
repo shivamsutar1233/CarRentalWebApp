@@ -1,8 +1,7 @@
-import { TextField } from "@mui/material";
+import { Link, TextField } from "@mui/material";
 import { useState } from "react";
-import { StyledLoadingButton } from "../components/common/LoadingButton";
 import { useRegisterUserMutation } from "../redux/api/IdentityApi";
-import { NavLink } from "react-router";
+import { LoadingButton } from "@mui/lab";
 
 const Signup = () => {
   const [registerUser, { isLoading, data, error }] = useRegisterUserMutation();
@@ -51,18 +50,21 @@ const Signup = () => {
               setFormState((prev) => ({ ...prev, password: e.target.value }))
             }
           />
-          <StyledLoadingButton
+          <LoadingButton
             variant={"contained"}
             size={"large"}
             loading={isLoading}
             type="submit"
           >
             Signup
-          </StyledLoadingButton>
+          </LoadingButton>
         </form>
       </section>
       <section className="flex gap-2 min-w-96">
-        Already have an account? <NavLink to={"/Signin"}>Signin</NavLink>
+        Already have an account?{" "}
+        <Link href={"/Signin"} underline="hover">
+          Signin
+        </Link>
       </section>
     </section>
   );

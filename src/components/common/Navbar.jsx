@@ -2,13 +2,14 @@ import {
   Button,
   Divider,
   IconButton,
+  Link,
   List,
   ListItem,
   SwipeableDrawer,
+  useColorScheme,
 } from "@mui/material";
 import { NavLink } from "react-router";
-import { StyledButton } from "./Button";
-import { Fragment, useMemo, useState } from "react";
+import { Fragment, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -17,8 +18,9 @@ import { clearGlobalState } from "../../redux/slice/GlobalStateSlice";
 const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const [showSideBar, setShowSideBar] = useState(false),
     isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn),
-    dispatch = useDispatch();
-
+    dispatch = useDispatch(),
+    { mode, setMode } = useColorScheme();
+  console.log(mode);
   const navLinks = [
     {
       name: "Home",
@@ -47,9 +49,9 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const navLinksComponent = () => {
     return navLinks.map(({ link, name }) => (
       <ListItem key={name}>
-        <NavLink to={link} key={name}>
+        <Link href={link} key={name} underline="none">
           {name}
-        </NavLink>
+        </Link>
       </ListItem>
     ));
   };
@@ -70,16 +72,16 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           <Fragment>
             <ListItem>
               <NavLink to={"/Signin"}>
-                <StyledButton variant={"contained"} size="small">
+                <Button variant={"contained"} size="small">
                   Signin
-                </StyledButton>
+                </Button>
               </NavLink>
             </ListItem>
             <ListItem>
               <NavLink to={"/Signup"}>
-                <StyledButton variant={"outlined"} size="small">
+                <Button variant={"outlined"} size="small">
                   Signup
-                </StyledButton>
+                </Button>
               </NavLink>
             </ListItem>
           </Fragment>
@@ -87,13 +89,13 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
         {isLoggedIn && (
           <ListItem>
             <NavLink to={"/Signin"}>
-              <StyledButton
+              <Button
                 variant={"contained"}
                 size="small"
                 onClick={() => handleSignout()}
               >
                 Signout
-              </StyledButton>
+              </Button>
             </NavLink>
           </ListItem>
         )}
@@ -103,6 +105,15 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const handleSignout = () => {
     localStorage.clear();
     dispatch(clearGlobalState());
+  };
+
+  const handleApplicationTheme = () => {
+    if (isDarkMode) {
+      setMode("light");
+    } else {
+      setMode("dark");
+    }
+    setIsDarkMode((prev) => !prev);
   };
   return (
     <section className=" flex justify-between items-center px-6 py-4 ">
@@ -120,30 +131,30 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           {!isLoggedIn && (
             <Fragment>
               <NavLink to={"/Signin"}>
-                <StyledButton variant={"contained"} size="small">
+                <Button variant={"contained"} size="small">
                   Signin
-                </StyledButton>
+                </Button>
               </NavLink>
               <NavLink to={"/Signup"}>
-                <StyledButton variant={"outlined"} size="small">
+                <Button variant={"outlined"} size="small">
                   Signup
-                </StyledButton>
+                </Button>
               </NavLink>
             </Fragment>
           )}
           {isLoggedIn && (
             <NavLink to={"/Signin"}>
-              <StyledButton
+              <Button
                 variant={"contained"}
                 size="small"
                 onClick={() => handleSignout()}
               >
                 Signout
-              </StyledButton>
+              </Button>
             </NavLink>
           )}
         </section>
-        <IconButton onClick={() => setIsDarkMode((prev) => !prev)}>
+        <IconButton onClick={() => handleApplicationTheme()}>
           {isDarkMode ? (
             <DarkModeIcon className=" dark:fill-slate-400" />
           ) : (
