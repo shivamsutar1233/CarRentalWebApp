@@ -130,9 +130,22 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       className=" w-full  flex justify-between items-center px-6 py-4 z-10 absolute top-0
     "
     >
-      <section className=" text-2xl font-bold cursor-pointer leading-none  ">
-        Rentals<span className=" text-cyan-800 dark:text-yellow-400">.</span>
-      </section>
+      <Typography
+        variant="h5"
+        color="primary"
+        sx={{ fontWeight: 600 }}
+        className=" cursor-pointer flex"
+      >
+        Rentals
+        <Typography
+          variant="h5"
+          color="secondary"
+          sx={{ fontWeight: 600 }}
+          className=""
+        >
+          .
+        </Typography>
+      </Typography>
       <section className="flex text ">
         <nav className="hidden md:flex md:gap-6">
           {navLinksComponent()}
