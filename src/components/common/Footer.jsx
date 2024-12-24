@@ -2,6 +2,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { Divider, IconButton, Link, Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 const Footer = () => {
   const getSocialMediaSection = () => {
     return (
@@ -26,7 +27,9 @@ const Footer = () => {
   const getCompanySection = () => {
     return (
       <section className=" flex flex-col justify-between gap-2">
-        <Typography variant="subtitle1">Company</Typography>
+        <Typography variant="subtitle1" color={grey[500]}>
+          Company
+        </Typography>
         <Link underline="none" href={"/About"}>
           About
         </Link>
@@ -62,7 +65,9 @@ const Footer = () => {
   const getServicesSection = () => {
     return (
       <section className=" flex flex-col justify-between gap-2">
-        <Typography variant="subtitle1">Services</Typography>
+        <Typography variant="subtitle1" color={grey[500]}>
+          Services
+        </Typography>
         <Link underline="none" href={"#CityRides"}>
           City rides
         </Link>
