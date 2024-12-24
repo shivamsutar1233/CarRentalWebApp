@@ -24,9 +24,15 @@ function Home() {
     },
   ];
   return (
-    <section>
-      <section className=" absolute top-0 ">
+    <section
+      className=" relative
+    "
+    >
+      <section className=" top-0">
         <StyledCarousel data={images} />
+        <section className=" h-80">Quick boooking</section>
+        <section className=" h-80">Features</section>
+        <section className=" h-80">Testimonials</section>
       </section>
     </section>
   );

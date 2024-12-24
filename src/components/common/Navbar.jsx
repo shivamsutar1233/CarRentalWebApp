@@ -126,7 +126,10 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   };
 
   return (
-    <section className=" flex justify-between items-center px-6 py-4 z-10 relative">
+    <section
+      className=" w-full  flex justify-between items-center px-6 py-4 z-10 absolute top-0
+    "
+    >
       <section className=" text-2xl font-bold cursor-pointer leading-none  ">
         Rentals<span className=" text-cyan-800 dark:text-yellow-400">.</span>
       </section>

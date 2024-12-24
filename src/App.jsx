@@ -3,7 +3,8 @@ import AppRoutes from "./AppRoutes";
 import Navbar from "./components/common/Navbar";
 import { useState } from "react";
 import { grey } from "@mui/material/colors";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Divider } from "@mui/material";
+import Footer from "./components/common/Footer";
 
 const theme = createTheme({
   palette: {
@@ -24,10 +25,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <section className="min-h-screen relative">
+      <section className="relative">
         <Navbar setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
-        <AppRoutes />
       </section>
+      <AppRoutes />
+      <Divider />
+      <Footer />
     </ThemeProvider>
   );
 }
