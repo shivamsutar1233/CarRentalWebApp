@@ -55,7 +55,7 @@ const Footer = () => {
         className=" flex"
       >
         Rentals
-        <Typography variant="h5" color="secondary" sx={{ fontWeight: 600 }}>
+        <Typography variant="p" color="secondary" sx={{ fontWeight: 600 }}>
           .
         </Typography>
       </Typography>

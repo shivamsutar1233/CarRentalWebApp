@@ -59,9 +59,9 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const protectedNavLinksComponent = () => {
     return protectedNavLinks.map(({ link, name }) => (
       <ListItem key={name}>
-        <NavLink to={link} key={name}>
+        <Link href={link} key={name} underline="none">
           {name}
-        </NavLink>
+        </Link>
       </ListItem>
     ));
   };
@@ -138,7 +138,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       >
         Rentals
         <Typography
-          variant="h5"
+          variant="p"
           color="secondary"
           sx={{ fontWeight: 600 }}
           className=""
