@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Image } from "react-bootstrap";
 import { Typography } from "@mui/material";
-export default function StyledCarousel({ data }) {
+export default function StyledCarousel({ data, interval }) {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex) => {
@@ -28,7 +28,7 @@ export default function StyledCarousel({ data }) {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+    <Carousel activeIndex={index} onSelect={handleSelect} interval={interval}>
       {data?.map((item) => getCarouselItem(item))}
     </Carousel>
   );

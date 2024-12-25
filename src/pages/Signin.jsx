@@ -25,7 +25,7 @@ const Signin = () => {
     }
   }, [data]);
   return (
-    <section className="flex flex-grow flex-col justify-center items-center py-48 gap-4">
+    <section className="flex flex-grow flex-col justify-center items-center py-48 gap-4 min-h-screen">
       <section className=" text-base font-semibold p-4">Welcome back</section>
       <section className=" min-w-96">
         <form

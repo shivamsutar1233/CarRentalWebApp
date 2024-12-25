@@ -21,7 +21,6 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn),
     dispatch = useDispatch(),
     { mode, setMode } = useColorScheme();
-  console.log(mode);
   const navLinks = [
     {
       name: "Home",

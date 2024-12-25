@@ -7,12 +7,13 @@ import {
   CardMedia,
   Chip,
   Grid2,
+  Rating,
   Skeleton,
   Typography,
 } from "@mui/material";
 import LocalGasStationSharpIcon from "@mui/icons-material/LocalGasStationSharp";
 import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
-const StyledCard = ({ car }) => {
+const StyledCard = ({ car, handleBooking }) => {
   const {
     make,
     model,
@@ -23,6 +24,7 @@ const StyledCard = ({ car }) => {
     isAvailable,
     fuelType,
     carType,
+    id,
   } = car;
   return (
     <Card>
@@ -35,12 +37,21 @@ const StyledCard = ({ car }) => {
         />
         <CardContent>
           <Grid2 container>
-            <Grid2 size="grow">
+            <Grid2
+              size="grow"
+              sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
               <Chip
                 label={year}
                 size="small"
                 className="p-2"
                 variant="outlined"
+              />
+              <Rating
+                readOnly
+                defaultValue={Math.random() * 5}
+                precision={0.1}
+                size="small"
               />
             </Grid2>
             <Grid2>
@@ -91,11 +102,7 @@ const StyledCard = ({ car }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => console.log("secondary action")}
-        >
+        <Button size="small" color="primary" onClick={() => handleBooking(id)}>
           Book now
         </Button>
       </CardActions>

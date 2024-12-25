@@ -11,7 +11,12 @@ export const carApi = createApi({
         url: "/",
       }),
     }),
+    getCarById: builder.query({
+      query: (id) => ({
+        url: `/${id}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetApplicationCarsQuery } = carApi;
+export const { useGetApplicationCarsQuery, useGetCarByIdQuery } = carApi;

@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Cars from "./pages/Cars";
+import BookCar from "./pages/BookCar";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Signin" element={<Signin />} />
       <Route path="/Cars" element={<Cars />} />
+      <Route path="/BookCar" element={<BookCar />} />
     </Routes>
   );
 };
