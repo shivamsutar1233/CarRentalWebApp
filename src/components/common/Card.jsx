@@ -37,7 +37,6 @@ const StyledCard = ({ car }) => {
           <Grid2 container>
             <Grid2 size="grow">
               <Chip
-                icon={<CurrencyRupeeSharpIcon />}
                 label={year}
                 size="small"
                 className="p-2"
