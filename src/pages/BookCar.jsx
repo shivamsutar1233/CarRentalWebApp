@@ -87,7 +87,7 @@ const BookCar = () => {
           </Grid2>
           {/* Booking Form */}
           <Grid2 container component={"form"} spacing={2} className="py-6 ">
-            <Grid2 size={6}>
+            <Grid2 size={{ xs: 12, md: 6 }}>
               <TextField
                 label="Pickup address"
                 variant="outlined"
@@ -95,7 +95,7 @@ const BookCar = () => {
                 required
               />
             </Grid2>
-            <Grid2 size={6}>
+            <Grid2 size={{ xs: 12, md: 6 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
                   label="Pickup date and time"
@@ -116,7 +116,7 @@ const BookCar = () => {
               />
             </Grid2>
             {!isRoundTrip && (
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <TextField
                   label="Drop address"
                   variant="outlined"
@@ -126,7 +126,7 @@ const BookCar = () => {
               </Grid2>
             )}
             {!isRoundTrip && (
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateTimePicker
                     label="Drop date and time"
