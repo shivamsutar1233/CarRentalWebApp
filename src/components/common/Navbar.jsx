@@ -70,7 +70,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     return protectedNavLinks.map(({ link, name }) => (
       <ListItem key={name}>
         <NavLink
-          href={link}
+          to={link}
           key={name}
           underline="none"
           onClick={() => setShowSideBar(false)}

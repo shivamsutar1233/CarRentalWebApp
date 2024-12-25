@@ -21,7 +21,12 @@ export const bookingApi = createApi({
         body,
       }),
     }),
+    getAllBookings: builder.query({
+      query: (queryParams = "") => ({
+        url: `/getAllBookings?${queryParams}`,
+      }),
+    }),
   }),
 });
 
-export const { useSaveBookingMutation } = bookingApi;
+export const { useSaveBookingMutation, useGetAllBookingsQuery } = bookingApi;

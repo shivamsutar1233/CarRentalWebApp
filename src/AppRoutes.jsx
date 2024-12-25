@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useRefreshUserTokenMutation } from "./redux/api/IdentityApi";
 import { setIsLoggedIn } from "./redux/slice/GlobalStateSlice";
+import Bookings from "./pages/Bookings";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
@@ -36,6 +37,10 @@ const AppRoutes = () => {
       <Route path="/Signin" element={isLoggedIn ? <Home /> : <Signin />} />
       <Route path="/Cars" element={<Cars />} />
       <Route path="/BookCar" element={isLoggedIn ? <BookCar /> : <Signin />} />
+      <Route
+        path="/Bookings"
+        element={isLoggedIn ? <Bookings /> : <Signin />}
+      />
     </Routes>
   );
 };
