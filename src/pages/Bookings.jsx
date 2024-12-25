@@ -34,6 +34,13 @@ const Bookings = () => {
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[1, 2]}
+        loading={isLoading}
+        slotProps={{
+          loadingOverlay: {
+            variant: "skeleton",
+            noRowsVariant: "skeleton",
+          },
+        }}
         // checkboxSelection
         sx={{ border: 0 }}
       />
