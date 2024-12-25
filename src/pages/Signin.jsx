@@ -6,7 +6,7 @@ import { setIsLoggedIn } from "../redux/slice/GlobalStateSlice";
 import { LoadingButton } from "@mui/lab";
 
 const Signin = () => {
-  const [loginUser, { isLoading, data, error }] = useLoginUserMutation();
+  const [loginUser, { isLoading, data }] = useLoginUserMutation();
   const [formState, setFormState] = useState({ email: "", password: "" });
 
   const dispatch = useDispatch();
