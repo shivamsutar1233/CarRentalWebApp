@@ -20,7 +20,18 @@ export const identityApi = createApi({
         body,
       }),
     }),
+    refreshUserToken: builder.mutation({
+      query: (body) => ({
+        url: `refresh`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = identityApi;
+export const {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+  useRefreshUserTokenMutation,
+} = identityApi;

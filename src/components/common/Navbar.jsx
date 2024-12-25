@@ -2,7 +2,6 @@ import {
   Button,
   Divider,
   IconButton,
-  Link,
   List,
   ListItem,
   SwipeableDrawer,
@@ -21,6 +20,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn),
     dispatch = useDispatch(),
     { mode, setMode } = useColorScheme();
+
   const navLinks = [
     {
       name: "Home",
@@ -46,21 +46,40 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       link: "/Bookings",
     },
   ];
+
   const navLinksComponent = () => {
     return navLinks.map(({ link, name }) => (
       <ListItem key={name}>
-        <Link href={link} key={name} underline="none">
-          {name}
-        </Link>
+        <NavLink
+          to={link}
+          key={name}
+          underline="none"
+          onClick={() => setShowSideBar(false)}
+          className=" no-underline"
+          // color="primary"
+        >
+          <Typography variant="p" color="primary">
+            {name}
+          </Typography>
+        </NavLink>
       </ListItem>
     ));
   };
+
   const protectedNavLinksComponent = () => {
     return protectedNavLinks.map(({ link, name }) => (
       <ListItem key={name}>
-        <Link href={link} key={name} underline="none">
-          {name}
-        </Link>
+        <NavLink
+          href={link}
+          key={name}
+          underline="none"
+          onClick={() => setShowSideBar(false)}
+          className="no-underline"
+        >
+          <Typography variant="p" color="primary">
+            {name}
+          </Typography>
+        </NavLink>
       </ListItem>
     ));
   };
@@ -71,7 +90,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
         {!isLoggedIn && (
           <Fragment>
             <ListItem>
-              <NavLink to={"/Signin"}>
+              <NavLink to={"/Signin"} onClick={() => setShowSideBar(false)}>
                 <Button variant={"contained"} size="small">
                   Signin
                 </Button>
@@ -88,7 +107,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
         )}
         {isLoggedIn && (
           <ListItem>
-            <NavLink to={"/Signin"}>
+            <NavLink to={"/Signin"} onClick={() => setShowSideBar(false)}>
               <Button
                 variant={"contained"}
                 size="small"
@@ -102,6 +121,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       </Fragment>
     );
   };
+
   const handleSignout = () => {
     localStorage.clear();
     dispatch(clearGlobalState());
@@ -210,9 +230,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
               {isLoggedIn && protectedNavLinksComponent()}
             </List>
             <Divider />
-            <List className="block w-72 md:hidden">
-              {getIdentityButtons(0)}
-            </List>
+            <List className="block w-72 md:hidden">{getIdentityButtons()}</List>
           </SwipeableDrawer>
         </section>
       </section>

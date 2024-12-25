@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const carApi = createApi({
-  reducerPath: "cari",
+  reducerPath: "carApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://carental.alphasquare.in/api/cars",
   }),

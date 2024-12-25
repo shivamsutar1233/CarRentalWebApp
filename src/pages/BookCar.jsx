@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useGetCarByIdQuery } from "../redux/api/CarApi";
 import StyledCarousel from "../components/common/Carousel";
 import { images } from "../util/UtilityFunctions";
@@ -16,15 +16,48 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { LoadingButton } from "@mui/lab";
-
+import dayjs from "dayjs";
+import { useSaveBookingMutation } from "../redux/api/BookingApi";
+import utc from "dayjs/plugin/utc";
 const BookCar = () => {
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("carId"));
   const carId = searchParams.get("carId");
   const { data, isLoading } = useGetCarByIdQuery(carId);
   const [isRoundTrip, setIsRoundTrip] = useState(true);
+  const [pAddress, setPAddress] = useState("");
+  const [dAddress, setDAddress] = useState("");
+  const [pDate, setPDate] = useState(dayjs(new Date()));
+  const [dDate, setDDate] = useState(dayjs(new Date()));
+  const formRef = useRef(null);
+  const navigate = useNavigate();
+
+  const [saveBooking, { isLoading: saveLoading, data: saveData }] =
+    useSaveBookingMutation();
+
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    console.log(formRef);
+    console.log(pAddress);
+    console.log(dAddress);
+    console.log(dDate.toString());
+    console.log(pDate);
+    console.log(dayjs.extend(utc).utc().format());
+    let data = {
+      carId: carId,
+      pickupAddress: pAddress,
+      dropAddress: dAddress,
+      startDate: pDate.toDate(),
+      endDate: dDate.toISOString(),
+      totalAmount: 3500,
+    };
+    saveBooking(data).then(() => {
+      navigate("/Cars");
+    });
+  };
+
   return (
     <section className=" pt-20 p-6">
       {isLoading ? (
@@ -86,18 +119,31 @@ const BookCar = () => {
             </Grid2>
           </Grid2>
           {/* Booking Form */}
-          <Grid2 container component={"form"} spacing={2} className="py-6 ">
+          <Grid2
+            container
+            component={"form"}
+            spacing={2}
+            className="py-6 "
+            ref={formRef}
+            action="javascript:void (0)"
+            onSubmit={() => handleSubmit()}
+          >
             <Grid2 size={{ xs: 12, md: 6 }}>
               <TextField
                 label="Pickup address"
                 variant="outlined"
                 className=" w-full"
                 required
+                name="pickUpAddress"
+                value={pAddress}
+                onChange={(e) => setPAddress(e.target.value)}
               />
             </Grid2>
             <Grid2 size={{ xs: 12, md: 6 }}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DateTimePicker
+                  onChange={(e) => setPDate(e)}
+                  value={pDate}
                   label="Pickup date and time"
                   className=" w-full"
                 />
@@ -122,6 +168,8 @@ const BookCar = () => {
                   variant="outlined"
                   className=" w-full"
                   required
+                  value={dAddress}
+                  onChange={(e) => setDAddress(e.target.value)}
                 />
               </Grid2>
             )}
@@ -129,6 +177,8 @@ const BookCar = () => {
               <Grid2 size={{ xs: 12, md: 6 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DateTimePicker
+                    onChange={(e) => setDDate(e)}
+                    value={pDate}
                     label="Drop date and time"
                     className=" w-full"
                   />
@@ -139,6 +189,7 @@ const BookCar = () => {
               <LoadingButton
                 variant="contained"
                 type="submit"
+                loading={saveLoading}
                 startIcon={<CurrencyRupeeSharpIcon />}
               >
                 Pay 3500
