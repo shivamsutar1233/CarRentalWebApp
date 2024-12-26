@@ -237,10 +237,14 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
             <List className="block w-72 md:hidden">
               <section
                 className="flex items-center p-2 "
-                onClick={handleApplicationTheme}
+                // onClick={handleApplicationTheme}
               >
                 {getApplicationThemeComponent()}{" "}
-                <Typography variant="p" className=" cursor-pointer">
+                <Typography
+                  variant="p"
+                  className=" cursor-pointer"
+                  onClick={() => handleApplicationTheme()}
+                >
                   {isDarkMode ? "Dark theme" : "Light theme"}
                 </Typography>
               </section>
