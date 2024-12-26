@@ -54,7 +54,7 @@ const BookCar = () => {
       totalAmount: 3500,
     };
     saveBooking(data).then(() => {
-      navigate("/Cars");
+      navigate("/Bookings");
     });
   };
 
