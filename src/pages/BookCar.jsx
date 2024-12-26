@@ -21,12 +21,14 @@ import { LoadingButton } from "@mui/lab";
 import dayjs from "dayjs";
 import { useSaveBookingMutation } from "../redux/api/BookingApi";
 import utc from "dayjs/plugin/utc";
+import { displayRazorPay } from "../components/common/PaymentGateway";
 const BookCar = () => {
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("carId"));
   const carId = searchParams.get("carId");
   const { data, isLoading } = useGetCarByIdQuery(carId);
   const [isRoundTrip, setIsRoundTrip] = useState(true);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const [pAddress, setPAddress] = useState("");
   const [dAddress, setDAddress] = useState("");
   const [pDate, setPDate] = useState(dayjs(new Date()));
@@ -37,8 +39,9 @@ const BookCar = () => {
   const [saveBooking, { isLoading: saveLoading, data: saveData }] =
     useSaveBookingMutation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (paymentId) => {
     // e.preventDefault();
+    console.log(paymentId);
     console.log(formRef);
     console.log(pAddress);
     console.log(dAddress);
@@ -53,6 +56,7 @@ const BookCar = () => {
       endDate: dDate.toISOString(),
       totalAmount: 3500,
     };
+    setIsPaymentLoading(false);
     saveBooking(data).then(() => {
       navigate("/Bookings");
     });
@@ -126,7 +130,7 @@ const BookCar = () => {
             className="py-6 "
             ref={formRef}
             action="javascript:void (0)"
-            onSubmit={() => handleSubmit()}
+            // onSubmit={() => }
           >
             <Grid2 size={{ xs: 12, md: 6 }}>
               <TextField
@@ -189,7 +193,11 @@ const BookCar = () => {
               <LoadingButton
                 variant="contained"
                 type="submit"
-                loading={saveLoading}
+                loading={saveLoading || isPaymentLoading}
+                onClick={() => {
+                  setIsPaymentLoading(true);
+                  displayRazorPay(3500, (paymentId) => handleSubmit(paymentId));
+                }}
                 startIcon={<CurrencyRupeeSharpIcon />}
               >
                 Pay 3500

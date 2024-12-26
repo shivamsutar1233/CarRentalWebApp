@@ -27,12 +27,12 @@ const Bookings = () => {
   ];
   const paginationModel = { page: 0, pageSize: 2 };
   return (
-    <section className="pt-20 px-6 py-6">
+    <section className="pt-20 px-6 py-6 ">
       <DataGrid
         rows={data}
         columns={columns}
         initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[1, 2]}
+        pageSizeOptions={[1, 2, 5, 10, 20]}
         loading={isLoading}
         slotProps={{
           loadingOverlay: {
