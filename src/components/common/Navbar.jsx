@@ -158,22 +158,24 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       className=" w-full  flex justify-between items-center px-6 py-4 z-10 absolute top-0
     "
     >
-      <Typography
-        variant="h5"
-        color="primary"
-        sx={{ fontWeight: 600 }}
-        className=" cursor-pointer flex"
-      >
-        Rentals
+      <NavLink to={"/"} className={"no-underline"}>
         <Typography
-          variant="p"
-          color="secondary"
+          variant="h5"
+          color="primary"
           sx={{ fontWeight: 600 }}
-          className=""
+          className=" cursor-pointer flex"
         >
-          .
+          Rentals
+          <Typography
+            variant="p"
+            color="secondary"
+            sx={{ fontWeight: 600 }}
+            className=""
+          >
+            .
+          </Typography>
         </Typography>
-      </Typography>
+      </NavLink>
       <section className="flex text ">
         <nav className="hidden md:flex md:gap-6">
           {navLinksComponent()}
