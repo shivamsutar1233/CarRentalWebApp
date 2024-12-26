@@ -67,6 +67,7 @@ const Signin = () => {
             variant={"contained"}
             size={"large"}
             loading={isLoading}
+            sx={{ textTransform: "none" }}
             type="submit"
           >
             Signin

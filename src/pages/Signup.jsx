@@ -9,8 +9,6 @@ const Signup = () => {
   const handleSubmit = async () => {
     await registerUser(formState);
   };
-  console.log(data);
-  console.log(error);
   return (
     <section className="flex flex-grow flex-col justify-center items-center py-48 gap-4">
       <section className=" text-base font-semibold p-4">
@@ -55,6 +53,7 @@ const Signup = () => {
             size={"large"}
             loading={isLoading}
             type="submit"
+            sx={{ textTransform: "none" }}
           >
             Signup
           </LoadingButton>

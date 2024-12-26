@@ -91,14 +91,22 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           <Fragment>
             <ListItem>
               <NavLink to={"/Signin"} onClick={() => setShowSideBar(false)}>
-                <Button variant={"contained"} size="small">
+                <Button
+                  sx={{ textTransform: "none" }}
+                  variant={"contained"}
+                  size="small"
+                >
                   Signin
                 </Button>
               </NavLink>
             </ListItem>
             <ListItem>
               <NavLink to={"/Signup"}>
-                <Button variant={"outlined"} size="small">
+                <Button
+                  sx={{ textTransform: "none" }}
+                  variant={"outlined"}
+                  size="small"
+                >
                   Signup
                 </Button>
               </NavLink>
@@ -109,6 +117,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           <ListItem>
             <NavLink to={"/Signin"} onClick={() => setShowSideBar(false)}>
               <Button
+                sx={{ textTransform: "none" }}
                 variant={"contained"}
                 size="small"
                 onClick={() => handleSignout()}
@@ -176,12 +185,20 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           {!isLoggedIn && (
             <Fragment>
               <NavLink to={"/Signin"}>
-                <Button variant={"contained"} size="small">
+                <Button
+                  sx={{ textTransform: "none" }}
+                  variant={"contained"}
+                  size="small"
+                >
                   Signin
                 </Button>
               </NavLink>
               <NavLink to={"/Signup"}>
-                <Button variant={"outlined"} size="small">
+                <Button
+                  sx={{ textTransform: "none" }}
+                  variant={"outlined"}
+                  size="small"
+                >
                   Signup
                 </Button>
               </NavLink>
@@ -190,6 +207,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
           {isLoggedIn && (
             <NavLink to={"/Signin"}>
               <Button
+                sx={{ textTransform: "none" }}
                 variant={"contained"}
                 size="small"
                 onClick={() => handleSignout()}
