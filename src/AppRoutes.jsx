@@ -7,27 +7,12 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Cars from "./pages/Cars";
 import BookCar from "./pages/BookCar";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useRefreshUserTokenMutation } from "./redux/api/IdentityApi";
-import { setIsLoggedIn } from "./redux/slice/GlobalStateSlice";
+import { useSelector } from "react-redux";
 import Bookings from "./pages/Bookings";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
-  const dispatch = useDispatch();
-  const [refreshUserToken, { isLoading, data }] = useRefreshUserTokenMutation();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refresh-token");
-    if (token) {
-      refreshUserToken({ refreshToken: refreshToken }).then(() => {
-        dispatch(setIsLoggedIn(true));
-      });
-    } else {
-      dispatch(setIsLoggedIn(false));
-    }
-  }, []);
+
   return (
     <Routes>
       <Route path="/" index element={<Home />} />
