@@ -3,7 +3,6 @@ import { useGetAllBookingsQuery } from "../redux/api/BookingApi";
 
 const Bookings = () => {
   const { data, isLoading } = useGetAllBookingsQuery();
-  console.log(data);
   const columns = [
     { field: "email", flex: 1, headerName: "Username" },
     { field: "carMake", flex: 1, headerName: "Car Make" },

@@ -19,7 +19,6 @@ const Signin = () => {
     await loginUser(formState)
       .then((res) => {
         dispatch(setIsLoggedIn(true));
-        console.log(res);
         localStorage.setItem("token", res?.data?.accessToken);
         localStorage.setItem("refresh-token", res?.data?.refreshToken);
         if (location.pathname === "/Signin") navigate("/");

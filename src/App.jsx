@@ -39,15 +39,15 @@ function App() {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refresh-token");
     if (token) {
-      refreshUserToken({ refreshToken: refreshToken }).then(() => {
+      refreshUserToken({ refreshToken: refreshToken }).then((response) => {
         dispatch(setIsLoggedIn(true));
+        localStorage.setItem("token", response?.data?.accessToken);
+        localStorage.setItem("refresh-token", response?.data?.refreshToken);
       });
     } else {
       dispatch(setIsLoggedIn(false));
     }
   }, []);
-
-  // if (isLoading) return "loading";
 
   return (
     <ThemeProvider theme={theme}>
