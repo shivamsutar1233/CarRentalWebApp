@@ -2,7 +2,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppRoutes from "./AppRoutes";
 import Navbar from "./components/common/Navbar";
 import { Fragment, useEffect, useState } from "react";
-import { grey } from "@mui/material/colors";
+import { deepPurple, grey } from "@mui/material/colors";
 import { Box, CircularProgress, CssBaseline, Divider } from "@mui/material";
 import Footer from "./components/common/Footer";
 import { useDispatch } from "react-redux";
@@ -16,12 +16,20 @@ const theme = createTheme({
         primary: {
           main: grey[100],
         },
+        background: {
+          default: grey[800],
+          paper: grey[800],
+        },
       },
     },
     light: {
       palette: {
         primary: {
           main: grey[900],
+        },
+        background: {
+          default: deepPurple[50],
+          paper: deepPurple[50],
         },
       },
     },
