@@ -3,9 +3,9 @@ import React,{ Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls, PresentationControls, Stage, useGLTF } from '@react-three/drei'
 import { useTheme } from '@mui/material/styles';
-
+// import { CircularProgress } from "@mui/material";
 function Model(props) {
-    const gltf = useGLTF(`src/assets/${props.name}/scene.gltf`)
+    const gltf = useGLTF(`/${props.name}/scene.gltf`)
     return <primitive {...props} object={gltf.scene} rotation={[0,Math.PI/2,0]}/>
 }
   
@@ -17,9 +17,11 @@ function Model(props) {
       }}> 
         <ambientLight intensity={1}/>
         <PresentationControls speed={1.5} global zoom={0.5} polar={[-0.1,Math.PI/2]}/>
+         <Suspense fallback={ 'Loading'}>
         <Stage environment={null} >
-          <Model name={name} />
+         <Model name={name} />
           </Stage> 
+         </Suspense>
                  
          <Environment preset={theme.palette.mode ==="light" ? 'dawn' :'night'} background blur={1} />
           <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
