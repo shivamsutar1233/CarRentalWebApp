@@ -13,7 +13,7 @@ export default function StyledCarousel({ data, interval }) {
 
   const getCarouselItem = (item) => {
     return (
-      <Carousel.Item key={item.heading}>
+      <Carousel.Item key={item.heading} interval={10000}>
         {/* <Image
           className=" w-full object-cover aspect-video"
           text="First slide"
