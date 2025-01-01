@@ -18,19 +18,25 @@ export const getCurrentResource = () => {
 export const images = [
   {
     img: img2,
-    // heading: "Image1",
+    heading: "scorpio",
     // description:
     //   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aspernatur mollitia illum libero, sed voluptatem officia obcaecati ex autem accusamus.",
   },
   {
     img: img3,
-    // heading: "Image2",
+    heading: "polo",
     // description:
     //   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aspernatur mollitia illum libero, sed voluptatem officia obcaecati ex autem accusamus.",
   },
   {
     img: img5,
-    // heading: "Image3",
+    heading: "safari",
+    // description:
+    //   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aspernatur mollitia illum libero, sed voluptatem officia obcaecati ex autem accusamus.",
+  },
+  {
+    img: img5,
+    heading: "ecosport",
     // description:
     //   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aspernatur mollitia illum libero, sed voluptatem officia obcaecati ex autem accusamus.",
   },

@@ -56,7 +56,6 @@ function App() {
       dispatch(setIsLoggedIn(false));
     }
   }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
