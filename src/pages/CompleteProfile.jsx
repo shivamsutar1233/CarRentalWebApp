@@ -4,11 +4,13 @@ import {
   Divider,
   Icon,
   IconButton,
+  MobileStepper,
   Step,
   StepContent,
   StepLabel,
   Stepper,
   Typography,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import BasicDetails from "../components/common/BasicDetails";
@@ -21,9 +23,11 @@ import { setIsProfileComplted } from "../redux/slice/GlobalStateSlice";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 const CompleteProfile = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -105,8 +109,8 @@ const CompleteProfile = () => {
     );
   };
   return (
-    <section className="pt-20 px-48 py-6 flex justify-between gap-6">
-      <section className="">
+    <section className="pt-20 px-6 lg:px-48 py-6 flex flex-col md:flex-row justify-between gap-6">
+      <section className="hidden md:block">
         <Stepper activeStep={activeStep} orientation="vertical">
           {completedProfileSteps.map((label, index) => (
             <Step>
@@ -115,7 +119,12 @@ const CompleteProfile = () => {
           ))}
         </Stepper>
       </section>
-      <Divider orientation="vertical" variant="middle" flexItem />
+      <Divider
+        orientation="vertical"
+        variant="middle"
+        flexItem
+        className="hidden md:block"
+      />
       <section className="flex flex-1">
         {getActiveBuildStep(activeStep)}
       </section>

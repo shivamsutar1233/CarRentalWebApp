@@ -1,5 +1,6 @@
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import React from "react";
+import Verification from "./Verification";
 
 const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
   const kycOptions = [
@@ -28,39 +29,17 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
           <Autocomplete
             disablePortal
             options={kycOptions}
-            sx={{ width: 375 }}
+            sx={{ width: "22rem" }}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="Select preffered proof type"
-                className="col-span-6"
+                className="col-span-12 sm:col-span-6"
               />
             )}
           />
         </section>
-        <section className="grid grid-cols-12 col-span-12 gap-1">
-          <TextField label="KYC number" className="col-span-6" />
-
-          <Button
-            variant="outlined"
-            onClick={() => {}}
-            size="small"
-            className=" col-end-7 col-span-2"
-          >
-            resend otp
-          </Button>
-        </section>
-        <section className="grid grid-cols-12 col-span-12 gap-1">
-          <TextField label="OTP" className="col-span-6" />
-          <Button
-            variant="outlined"
-            onClick={() => {}}
-            size="small"
-            className=" col-end-7 col-span-2"
-          >
-            Verify otp
-          </Button>
-        </section>
+        <Verification name={"KYC document number"} />
         <section className="col-span-12 flex justify-between">
           <Button variant="outlined" onClick={handleBack}>
             Back
