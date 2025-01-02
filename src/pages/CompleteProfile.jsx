@@ -105,30 +105,12 @@ const CompleteProfile = () => {
     );
   };
   return (
-    <section className="pt-20 px-6 py-6 flex justify-between gap-2">
+    <section className="pt-20 px-48 py-6 flex justify-between gap-6">
       <section className="">
         <Stepper activeStep={activeStep} orientation="vertical">
           {completedProfileSteps.map((label, index) => (
             <Step>
               <StepLabel>{label}</StepLabel>
-              {/* <StepContent>
-                        <Typography>{label}</Typography>
-                            <Box sx={{ mb: 2 }}>
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  {index === completedProfileSteps.length - 1 ? 'Finish' : 'Continue'}
-                </Button>
-                <Button
-                  disabled={index === 0}
-                  onClick={handleBack}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  Back
-                </Button>
-              </Box></StepContent> */}
             </Step>
           ))}
         </Stepper>
