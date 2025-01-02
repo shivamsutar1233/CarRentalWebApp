@@ -9,11 +9,11 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
       </Typography>
       <section className="grid grid-cols-12 gap-6 mt-6">
         <TextField
-          label="Firstname"
+          label="First name"
           className="col-span-12 md:col-span-6 lg:col-span-6"
         />
         <TextField
-          label="Lastname"
+          label="Last name"
           className="col-span-12 md:col-span-6 lg:col-span-6"
         />
         <TextField
