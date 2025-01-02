@@ -2,10 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const GlobalStateSlice = createSlice({
   name: "globalState",
-  initialState: {},
+  initialState: { isProfileCompleted: false },
   reducers: {
     setIsLoggedIn: (state, action) => {
       return { ...state, isLoggedIn: action.payload };
+    },
+    setIsProfileComplted: (state, action) => {
+      return { ...state, isProfileCompleted: action.payload };
     },
     clearGlobalState: (state) => {
       return {};
@@ -13,6 +16,7 @@ const GlobalStateSlice = createSlice({
   },
 });
 
-export const { setIsLoggedIn, clearGlobalState } = GlobalStateSlice.actions;
+export const { setIsLoggedIn, clearGlobalState, setIsProfileComplted } =
+  GlobalStateSlice.actions;
 
 export default GlobalStateSlice.reducer;
