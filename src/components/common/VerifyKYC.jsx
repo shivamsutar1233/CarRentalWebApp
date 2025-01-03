@@ -1,8 +1,12 @@
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import Verification from "./Verification";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
 
 const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
+  const { kycType, kycNumber } = useSelector((state) => state?.completeProfile);
+  const dispatch = useDispatch();
   const kycOptions = [
     {
       id: 100,
@@ -21,6 +25,7 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
       label: "Voter Id",
     },
   ];
+  console.log(kycType);
   return (
     <section className=" flex flex-1 flex-col">
       <Typography variant="p">Let's quickly verify your kyc</Typography>
@@ -30,6 +35,11 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
             disablePortal
             options={kycOptions}
             sx={{ width: "22rem" }}
+            componentName="kycType"
+            defaultValue={kycType}
+            onChange={(e, value) =>
+              dispatch(updateCompeleteProfileState({ key: "kycType", value }))
+            }
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -39,7 +49,7 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
             )}
           />
         </section>
-        <Verification name={"KYC document number"} />
+        <Verification name={"KYC document number"} value={kycNumber} />
         <section className="col-span-12 flex justify-between">
           <Button variant="outlined" onClick={handleBack}>
             Back

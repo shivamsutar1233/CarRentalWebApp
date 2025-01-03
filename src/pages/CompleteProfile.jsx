@@ -12,7 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import BasicDetails from "../components/common/BasicDetails";
 import { completeProfileStages } from "../util/UIConstants";
 import VerifyEmail from "../components/common/VerifyEmail";
@@ -28,6 +28,7 @@ const CompleteProfile = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const dispatch = useDispatch();
   const theme = useTheme();
+  const [completeProfileData, setCompleteProfileData] = useState();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -90,10 +91,8 @@ const CompleteProfile = () => {
   const getProfileCOmpletedStep = () => {
     setTimeout(() => {
       setIsLoading(false);
-      // dispatch(setIsProfileComplted(true));
     }, 2000);
     setTimeout(() => {
-      // setIsLoading(false);
       dispatch(setIsProfileComplted(true));
     }, 3000);
     return (

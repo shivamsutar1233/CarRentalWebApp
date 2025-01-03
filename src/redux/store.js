@@ -4,6 +4,7 @@ import { identityApi } from "./api/IdentityApi";
 import globalStateReducer from "./slice/GlobalStateSlice";
 import { carApi } from "./api/CarApi";
 import { bookingApi } from "./api/BookingApi";
+import completeProfileReducer from "./slice/CompleteProfileSlice";
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
@@ -11,6 +12,7 @@ export const store = configureStore({
     [carApi.reducerPath]: carApi.reducer,
     [bookingApi.reducerPath]: bookingApi.reducer,
     globalState: globalStateReducer,
+    completeProfile: completeProfileReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
