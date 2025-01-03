@@ -5,27 +5,89 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
 
 const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
-  const { kycType, kycNumber } = useSelector((state) => state?.completeProfile);
+  const { kycType } = useSelector((state) => state?.completeProfile);
+  const completeProfileState = useSelector((state) => state?.completeProfile);
   const dispatch = useDispatch();
   const kycOptions = [
     {
       id: 100,
       label: "Addhar Id",
+      value: "addharNumber",
     },
     {
       id: 101,
       label: "Pan Id",
+      value: "panNumber",
     },
     {
       id: 102,
       label: "Driving license",
+      value: "drivingLicenseNumber",
     },
     {
       id: 103,
       label: "Voter Id",
+      value: "voterNumber",
     },
   ];
-  console.log(kycType);
+  console.log(completeProfileState);
+
+  const panRegex = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
+
+  const renderError = () => {
+    return (
+      completeProfileState[kycType?.value] !== "" &&
+      !regexForMobile.test(completeProfileState[kycType?.value])
+    );
+  };
+
+  const getErrorMessage = () => {
+    switch (completeProfileState[kycType?.value]) {
+      case kycOptions[0].value:
+        return "Enter valid addhar number";
+      case kycOptions[1].value:
+        return "Enter valid pan number";
+    }
+  };
+
+  const getRegexForInput = () => {
+    switch (completeProfileState[kycType?.value]) {
+      case kycOptions[0].value:
+        return "";
+      case kycOptions[1].value:
+        return panRegex;
+    }
+  };
+  const renderErrorMessage = () => {
+    return completeProfileState[kycType?.value] !== "" &&
+      !getRegexForInput().test(completeProfileState[kycType?.value])
+      ? getErrorMessage()
+      : "";
+  };
+
+  const getInputFormatter = (value) => {
+    switch (completeProfileState[kycType?.value]) {
+      case kycOptions[0].value:
+        return value
+          .replace(/\D/g, "")
+          .split(/(?:([\d]{4}))/g)
+          .filter((s) => s.length > 0)
+          .join("-");
+      case kycOptions[1].value:
+        return "";
+    }
+  };
+
+  const getInputAllowableLettersAndDigits = (e) => {
+    // console.log();
+    switch (completeProfileState[kycType?.value]) {
+      case kycOptions[0].value:
+        return e, target.value.replace(/[^0-9]/g, "");
+      case kycOptions[1].value:
+        return "";
+    }
+  };
+
   return (
     <section className=" flex flex-1 flex-col">
       <Typography variant="p">Let's quickly verify your kyc</Typography>
@@ -47,9 +109,35 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
                 className="col-span-12 sm:col-span-6"
               />
             )}
+            error={renderError}
+            helperText={renderErrorMessage}
           />
         </section>
-        <Verification name={"KYC document number"} value={kycNumber} />
+        <Verification
+          label={kycType?.label}
+          name={kycType?.value}
+          value={completeProfileState[kycType?.value]}
+          slotProps={{
+            htmlInput: {
+              maxLength: 14,
+            },
+          }}
+          onChange={(e) =>
+            dispatch(
+              updateCompeleteProfileState({
+                key: e.target.name,
+                value: e.target.value,
+              })
+            )
+          }
+          onInput={(e) => {
+            // console.log(getInputAllowableLettersAndDigits(e));
+            e.target.value =
+              // completeProfileState[kycType?.value] === kycOptions[0].value
+              //   ? e.target.value.replace(/[^0-9]/g, ""):
+              e.target.value;
+          }}
+        />
         <section className="col-span-12 flex justify-between">
           <Button variant="outlined" onClick={handleBack}>
             Back

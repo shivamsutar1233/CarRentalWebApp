@@ -6,6 +6,10 @@ const initialState = {
   mobile: "",
   kycNumber: "",
   kycType: "",
+  addharNumber: "",
+  panNumber: "",
+  voterNumber: "",
+  drivingLicenseNumber: "",
 };
 
 const CompleteProfileSlice = createSlice({

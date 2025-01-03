@@ -62,12 +62,12 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={mobile}
           name="mobile"
-          error={mobile !== "" && !regexForMobile.test(mobile)}
           slotProps={{
             htmlInput: {
               maxLength: 10,
             },
           }}
+          error={mobile !== "" && !regexForMobile.test(mobile)}
           helperText={
             mobile !== "" && !regexForMobile.test(mobile)
               ? "Please enter valid mobile number"
