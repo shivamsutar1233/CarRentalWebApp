@@ -112,7 +112,7 @@ const CompleteProfile = () => {
       <section className="hidden md:block">
         <Stepper activeStep={activeStep} orientation="vertical">
           {completedProfileSteps.map((label, index) => (
-            <Step>
+            <Step key={index}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
