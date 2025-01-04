@@ -108,9 +108,9 @@ const CompleteProfile = () => {
     );
   };
   return (
-    <section className="pt-20 px-6 lg:px-48 py-6 flex flex-col md:flex-row justify-between gap-6">
-      <section className="hidden md:block">
-        <Stepper activeStep={activeStep} orientation="vertical">
+    <section className="pt-20 px-6 2xl:px-96 py-6 flex flex-col justify-center gap-6">
+      <section className="hidden md:block w-full 2xl:px-48">
+        <Stepper activeStep={activeStep} >
           {completedProfileSteps.map((label, index) => (
             <Step>
               <StepLabel>{label}</StepLabel>
@@ -124,7 +124,7 @@ const CompleteProfile = () => {
         flexItem
         className="hidden md:block"
       />
-      <section className="flex flex-1">
+      <section className="flex justify-center items-center md:px-48">
         {getActiveBuildStep(activeStep)}
       </section>
     </section>
