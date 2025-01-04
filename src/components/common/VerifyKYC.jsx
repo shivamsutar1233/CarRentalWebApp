@@ -30,6 +30,7 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
       value: "voterNumber",
     },
   ];
+  
   console.log(completeProfileState);
 
   const panRegex = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
@@ -92,11 +93,14 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
     <section className=" flex flex-1 flex-col">
       <Typography variant="p">Let's quickly verify your kyc</Typography>
       <section className="grid grid-cols-12 gap-6 mt-6">
-        <section>
+        <section
+        
+          className="col-span-12"
+        >
           <Autocomplete
             disablePortal
             options={kycOptions}
-            sx={{ width: "22rem" }}
+            // sx={{ width: "22rem" }}
             componentName="kycType"
             defaultValue={kycType}
             onChange={(e, value) =>
@@ -106,7 +110,7 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
               <TextField
                 {...params}
                 label="Select preffered proof type"
-                className="col-span-12 sm:col-span-6"
+                className="col-span-12"
               />
             )}
             error={renderError}
@@ -130,13 +134,13 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
               })
             )
           }
-          onInput={(e) => {
+          // onInput={(e) => {
             // console.log(getInputAllowableLettersAndDigits(e));
-            e.target.value =
+            // e.target.value =
               // completeProfileState[kycType?.value] === kycOptions[0].value
               //   ? e.target.value.replace(/[^0-9]/g, ""):
-              e.target.value;
-          }}
+          //     e.target.value;
+          // }}
         />
         <section className="col-span-12 flex justify-between">
           <Button variant="outlined" onClick={handleBack}>

@@ -1,12 +1,12 @@
 import { Button, TextField, Typography } from "@mui/material";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
 
-const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
+const BasicDetails = ({ handleNext }) => {
   const { firstName, lastName, email, mobile } = useSelector(
     (state) => state?.completeProfile
   );
+  console.log(mobile)
   const dispatch = useDispatch();
   var regexForMobile = /^[7-9][0-9]{9}$/;
   return (
@@ -14,12 +14,13 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
       <Typography variant="p">
         Please help us to understand your basic details
       </Typography>
-      <section className="grid grid-cols-12 gap-6 mt-6">
+      <form className="grid grid-cols-12 gap-6 mt-6" onSubmit={handleNext}>
         <TextField
           label="First name"
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={firstName}
           name="firstName"
+          required
           onChange={(e) =>
             dispatch(
               updateCompeleteProfileState({
@@ -34,6 +35,7 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={lastName}
           name="lastName"
+          required
           onChange={(e) =>
             dispatch(
               updateCompeleteProfileState({
@@ -42,12 +44,13 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
               })
             )
           }
-        />
+          />
         <TextField
           label="Email"
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={email}
           name="email"
+          required
           onChange={(e) =>
             dispatch(
               updateCompeleteProfileState({
@@ -56,12 +59,14 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
               })
             )
           }
-        />
+          />
         <TextField
           label="Mobile number"
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={mobile}
+          defaultValue={mobile}
           name="mobile"
+          required
           slotProps={{
             htmlInput: {
               maxLength: 10,
@@ -88,11 +93,11 @@ const BasicDetails = ({ handleNext, handleBack, handleReset }) => {
         />
         {/* <Button onClick={handleBack}>Back</Button> */}
         <section className="col-span-12 flex justify-end">
-          <Button variant="contained" onClick={handleNext}>
+          <Button variant="contained" type="submit"  sx={{ textTransform: "none" }}>
             Next
           </Button>
         </section>
-      </section>
+      </form>
     </section>
   );
 };
