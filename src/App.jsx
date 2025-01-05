@@ -7,7 +7,10 @@ import { Box, CircularProgress, CssBaseline, Divider } from "@mui/material";
 import Footer from "./components/common/Footer";
 import { useDispatch } from "react-redux";
 import { useRefreshUserTokenMutation } from "./redux/api/IdentityApi";
-import { setIsLoggedIn } from "./redux/slice/GlobalStateSlice";
+import {
+  clearGlobalState,
+  setIsLoggedIn,
+} from "./redux/slice/GlobalStateSlice";
 import { ToastContainer } from "react-toastify";
 
 const theme = createTheme({
@@ -43,16 +46,21 @@ function App() {
   );
 
   const dispatch = useDispatch();
-  const [refreshUserToken, { isLoading, data }] = useRefreshUserTokenMutation();
+  const [refreshUserToken, { isLoading }] = useRefreshUserTokenMutation();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refresh-token");
-    if (token) {
-      refreshUserToken({ refreshToken: refreshToken }).then((response) => {
-        dispatch(setIsLoggedIn(true));
-        localStorage.setItem("token", response?.data?.accessToken);
-        localStorage.setItem("refresh-token", response?.data?.refreshToken);
-      });
+    if (token && token !== "undefined") {
+      refreshUserToken({ refreshToken: refreshToken })
+        .then((response) => {
+          dispatch(setIsLoggedIn(true));
+          localStorage.setItem("token", response?.data?.accessToken);
+          localStorage.setItem("refresh-token", response?.data?.refreshToken);
+        })
+        .catch(() => {
+          localStorage.clear();
+          dispatch(clearGlobalState());
+        });
     } else {
       dispatch(setIsLoggedIn(false));
     }
@@ -70,7 +78,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme={isDarkMode?'dark':'light'}
+        theme={isDarkMode ? "dark" : "light"}
       />
       {isLoading ? (
         <Box
