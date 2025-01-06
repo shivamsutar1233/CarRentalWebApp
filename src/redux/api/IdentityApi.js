@@ -4,6 +4,14 @@ export const identityApi = createApi({
   reducerPath: "identityApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://carental.alphasquare.in/api/identity",
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     registerUser: builder.mutation({
@@ -27,6 +35,12 @@ export const identityApi = createApi({
         body,
       }),
     }),
+    getUserPreferences: builder.query({
+      query: () => ({
+        url: `GetUserPreferences`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -34,4 +48,5 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useRefreshUserTokenMutation,
+  useGetUserPreferencesQuery,
 } = identityApi;

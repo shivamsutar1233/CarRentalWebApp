@@ -1,5 +1,4 @@
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
-import React from "react";
 import Verification from "./Verification";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
@@ -24,13 +23,8 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
       label: "Driving license",
       value: "drivingLicenseNumber",
     },
-    {
-      id: 103,
-      label: "Voter Id",
-      value: "voterNumber",
-    },
   ];
-  
+
   console.log(completeProfileState);
 
   const panRegex = "[A-Z]{5}[0-9]{4}[A-Z]{1}";
@@ -93,10 +87,7 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
     <section className=" flex flex-1 flex-col">
       <Typography variant="p">Let's quickly verify your kyc</Typography>
       <section className="grid grid-cols-12 gap-6 mt-6">
-        <section
-        
-          className="col-span-12"
-        >
+        <section className="col-span-12">
           <Autocomplete
             disablePortal
             options={kycOptions}
@@ -135,10 +126,10 @@ const VerifyKYC = ({ handleNext, handleBack, handleReset }) => {
             )
           }
           // onInput={(e) => {
-            // console.log(getInputAllowableLettersAndDigits(e));
-            // e.target.value =
-              // completeProfileState[kycType?.value] === kycOptions[0].value
-              //   ? e.target.value.replace(/[^0-9]/g, ""):
+          // console.log(getInputAllowableLettersAndDigits(e));
+          // e.target.value =
+          // completeProfileState[kycType?.value] === kycOptions[0].value
+          //   ? e.target.value.replace(/[^0-9]/g, ""):
           //     e.target.value;
           // }}
         />

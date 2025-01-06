@@ -1,12 +1,28 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
+import {
+  setInitialProfileState,
+  updateCompeleteProfileState,
+} from "../../redux/slice/CompleteProfileSlice";
+import { useEffect } from "react";
 
 const BasicDetails = ({ handleNext }) => {
   const { firstName, lastName, email, mobile } = useSelector(
     (state) => state?.completeProfile
   );
-  console.log(mobile)
+  const userPreferences = useSelector(
+    (state) => state?.globalState?.userPreferences
+  );
+
+  useEffect(() => {
+    dispatch(
+      setInitialProfileState({
+        ...userPreferences,
+        mobile: userPreferences.phoneNumber,
+      })
+    );
+  }, []);
+
   const dispatch = useDispatch();
   var regexForMobile = /^[7-9][0-9]{9}$/;
   return (
@@ -44,12 +60,13 @@ const BasicDetails = ({ handleNext }) => {
               })
             )
           }
-          />
+        />
         <TextField
           label="Email"
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={email}
           name="email"
+          disabled
           required
           onChange={(e) =>
             dispatch(
@@ -59,12 +76,12 @@ const BasicDetails = ({ handleNext }) => {
               })
             )
           }
-          />
+        />
         <TextField
           label="Mobile number"
           className="col-span-12 md:col-span-6 lg:col-span-6"
           value={mobile}
-          defaultValue={mobile}
+          // defaultValue={userPreferences?.phoneNumber}
           name="mobile"
           required
           slotProps={{
@@ -93,7 +110,11 @@ const BasicDetails = ({ handleNext }) => {
         />
         {/* <Button onClick={handleBack}>Back</Button> */}
         <section className="col-span-12 flex justify-end">
-          <Button variant="contained" type="submit"  sx={{ textTransform: "none" }}>
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{ textTransform: "none" }}
+          >
             Next
           </Button>
         </section>

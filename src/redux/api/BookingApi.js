@@ -4,7 +4,7 @@ export const bookingApi = createApi({
   reducerPath: "bookingApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://carental.alphasquare.in/api/Booking",
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
         headers.set("authorization", `Bearer ${token}`);

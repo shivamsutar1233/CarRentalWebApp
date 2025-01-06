@@ -11,13 +11,16 @@ const initialState = {
   voterNumber: "",
   drivingLicenseNumber: "",
   isEmailVerified: false,
-  isMobileVerified:false
+  isMobileVerified: false,
 };
 
 const CompleteProfileSlice = createSlice({
   name: "CompleteProfile",
-  initialState: {...initialState, isProfileCompleted: false },
+  initialState: { ...initialState, isProfileCompleted: false },
   reducers: {
+    setInitialProfileState: (state, action) => {
+      return { ...state, ...action.payload };
+    },
     updateCompeleteProfileState: (state, action) => {
       return { ...state, [action.payload.key]: action.payload.value };
     },
@@ -27,7 +30,10 @@ const CompleteProfileSlice = createSlice({
   },
 });
 
-export const { updateCompeleteProfileState, clearCompleteProfile } =
-  CompleteProfileSlice.actions;
+export const {
+  updateCompeleteProfileState,
+  clearCompleteProfile,
+  setInitialProfileState,
+} = CompleteProfileSlice.actions;
 
 export default CompleteProfileSlice.reducer;

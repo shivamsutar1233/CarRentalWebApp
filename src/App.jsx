@@ -1,15 +1,19 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import AppRoutes from "./AppRoutes";
 import Navbar from "./components/common/Navbar";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { deepPurple, grey } from "@mui/material/colors";
 import { Box, CircularProgress, CssBaseline, Divider } from "@mui/material";
 import Footer from "./components/common/Footer";
 import { useDispatch } from "react-redux";
-import { useRefreshUserTokenMutation } from "./redux/api/IdentityApi";
+import {
+  useGetUserPreferencesQuery,
+  useRefreshUserTokenMutation,
+} from "./redux/api/IdentityApi";
 import {
   clearGlobalState,
   setIsLoggedIn,
+  setUserPreferences,
 } from "./redux/slice/GlobalStateSlice";
 import { ToastContainer } from "react-toastify";
 
@@ -44,9 +48,9 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(
     window.matchMedia("(prefers-color-scheme: dark)").matches
   );
-
   const dispatch = useDispatch();
   const [refreshUserToken, { isLoading }] = useRefreshUserTokenMutation();
+  const userPreferences = useGetUserPreferencesQuery();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refresh-token");
@@ -62,9 +66,14 @@ function App() {
           dispatch(clearGlobalState());
         });
     } else {
+      localStorage.clear();
       dispatch(setIsLoggedIn(false));
     }
   }, []);
+
+  useMemo(() => {
+    dispatch(setUserPreferences(userPreferences.data));
+  }, [userPreferences.data]);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -80,7 +89,7 @@ function App() {
         pauseOnHover
         theme={isDarkMode ? "dark" : "light"}
       />
-      {isLoading ? (
+      {isLoading || userPreferences.isLoading ? (
         <Box
           sx={{
             display: "flex",
