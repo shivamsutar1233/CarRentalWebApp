@@ -51,7 +51,7 @@ const BookCar = () => {
     let data = {
       carId: carId,
       pickupAddress: pAddress,
-      dropAddress: dAddress,
+      dropAddress: isRoundTrip ? pAddress : dAddress,
       startDate: pDate.toDate(),
       endDate: dDate.toISOString(),
       totalAmount: 3500,

@@ -1,34 +1,13 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Icon,
-  IconButton,
-  MobileStepper,
-  Step,
-  StepContent,
-  StepLabel,
-  Stepper,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import React, { createContext, useReducer, useState } from "react";
+import { Divider, Step, StepLabel, Stepper } from "@mui/material";
+import React from "react";
 import BasicDetails from "../components/common/BasicDetails";
 import { completeProfileStages } from "../util/UIConstants";
 import VerifyEmail from "../components/common/VerifyEmail";
 import VerifyMobile from "../components/common/VerifyMobile";
 import VerifyKYC from "../components/common/VerifyKYC";
-import { useDispatch } from "react-redux";
-import { setIsProfileComplted } from "../redux/slice/GlobalStateSlice";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import CircularProgress from "@mui/material/CircularProgress";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
+import ProfileCompleteStep from "../components/common/ProfileCompleteStep";
 const CompleteProfile = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const dispatch = useDispatch();
-  const theme = useTheme();
-  const [completeProfileData, setCompleteProfileData] = useState();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -84,33 +63,14 @@ const CompleteProfile = () => {
           />
         );
       case completeProfileStages.profileCompleted:
-        return getProfileCOmpletedStep();
+        return <ProfileCompleteStep />;
     }
   };
-  const [isLoading, setIsLoading] = useState(true);
-  const getProfileCOmpletedStep = () => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    setTimeout(() => {
-      dispatch(setIsProfileComplted(true));
-    }, 3000);
-    return (
-      <section className="flex flex-1 items-center justify-center">
-        {isLoading ? (
-          <CircularProgress />
-        ) : (
-          <IconButton>
-            <TaskAltIcon fontSize="large" />
-          </IconButton>
-        )}
-      </section>
-    );
-  };
+
   return (
     <section className="pt-20 px-6 2xl:px-96 py-6 flex flex-col justify-center gap-6">
       <section className="hidden md:block w-full 2xl:px-48">
-        <Stepper activeStep={activeStep} >
+        <Stepper activeStep={activeStep}>
           {completedProfileSteps.map((label, index) => (
             <Step key={index}>
               <StepLabel>{label}</StepLabel>

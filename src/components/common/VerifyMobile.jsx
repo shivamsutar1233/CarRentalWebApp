@@ -5,19 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateCompeleteProfileState } from "../../redux/slice/CompleteProfileSlice";
 import { toast } from "react-toastify";
 const VerifyMobile = ({ handleNext, handleBack, handleReset }) => {
-  const { mobile, isMobileVerified } = useSelector(
+  const { phoneNumber, isPhoneNumberVerified } = useSelector(
     (state) => state?.completeProfile
   );
   const [OTP, setOTP] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isMobileVerified) toast.success("OTP sent successfully");
+    if (!isPhoneNumberVerified) toast.success("OTP sent successfully");
   }, []);
 
   const handleSubmit = () => {
     dispatch(
-      updateCompeleteProfileState({ key: "isMobileVerified", value: true })
+      updateCompeleteProfileState({ key: "isPhoneNumberVerified", value: true })
     );
     toast.success("Mobile verified successfully");
   };
@@ -29,12 +29,12 @@ const VerifyMobile = ({ handleNext, handleBack, handleReset }) => {
       <section className="grid grid-cols-12 gap-6 mt-6">
         <Verification
           name={"Mobile number"}
-          value={mobile}
+          value={phoneNumber}
           disabled={true}
           setOTP={setOTP}
           OTP={OTP}
           handleSubmit={handleSubmit}
-          isVerified={isMobileVerified}
+          isVerified={isPhoneNumberVerified}
         />
         <section className="col-span-12 flex justify-between">
           <Button variant="outlined" onClick={handleBack}>

@@ -41,6 +41,13 @@ export const identityApi = createApi({
         method: "GET",
       }),
     }),
+    updateUserPreferences: builder.mutation({
+      query: (body) => ({
+        url: `UpdateUserPreferences`,
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -49,4 +56,5 @@ export const {
   useRegisterUserMutation,
   useRefreshUserTokenMutation,
   useLazyGetUserPreferencesQuery,
+  useUpdateUserPreferencesMutation,
 } = identityApi;

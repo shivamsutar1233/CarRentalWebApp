@@ -3,7 +3,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
-  mobile: "",
+  phoneNumber: "",
   kycNumber: "",
   kycType: "",
   addharNumber: "",
@@ -11,7 +11,8 @@ const initialState = {
   voterNumber: "",
   drivingLicenseNumber: "",
   isEmailVerified: false,
-  isMobileVerified: false,
+  isPhoneNumberVerified: false,
+  isKycVerified: false,
 };
 
 const CompleteProfileSlice = createSlice({

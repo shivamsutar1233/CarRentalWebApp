@@ -11,7 +11,7 @@ import { setUserPreferences } from "../../redux/slice/GlobalStateSlice";
 const BasicDetails = ({ handleNext }) => {
   const [getUserPreferences, { data, isLoading }] =
     useLazyGetUserPreferencesQuery();
-  const { firstName, lastName, email, mobile } = useSelector(
+  const { firstName, lastName, email, phoneNumber } = useSelector(
     (state) => state?.completeProfile
   );
   const userPreferences = useSelector(
@@ -19,9 +19,9 @@ const BasicDetails = ({ handleNext }) => {
   );
 
   useEffect(() => {
-    if (!userPreferences && !data) {
+    if (Object.keys(userPreferences).length == 0 && !data) {
       getUserPreferences();
-    } else {
+    } else if (data) {
       dispatch(setUserPreferences(data));
     }
   }, [data]);
@@ -31,7 +31,6 @@ const BasicDetails = ({ handleNext }) => {
       dispatch(
         setInitialProfileState({
           ...userPreferences,
-          mobile: userPreferences.phoneNumber,
         })
       );
     }
@@ -112,19 +111,19 @@ const BasicDetails = ({ handleNext }) => {
         <TextField
           label="Mobile number"
           className="col-span-12 md:col-span-6 lg:col-span-6"
-          value={mobile}
+          value={phoneNumber}
           // defaultValue={userPreferences?.phoneNumber}
-          name="mobile"
+          name="phoneNumber"
           required
           slotProps={{
             htmlInput: {
               maxLength: 10,
             },
           }}
-          error={mobile !== "" && !regexForMobile.test(mobile)}
+          error={phoneNumber !== "" && !regexForphoneNumber.test(phoneNumber)}
           helperText={
-            mobile !== "" && !regexForMobile.test(mobile)
-              ? "Please enter valid mobile number"
+            phoneNumber !== "" && !regexForphoneNumber.test(phoneNumber)
+              ? "Please enter valid phoneNumber number"
               : ""
           }
           onInput={(e) => {
@@ -144,7 +143,7 @@ const BasicDetails = ({ handleNext }) => {
     );
   };
   const dispatch = useDispatch();
-  var regexForMobile = /^[7-9][0-9]{9}$/;
+  var regexForphoneNumber = /^[7-9][0-9]{9}$/;
   return (
     <section className=" flex flex-1 flex-col">
       <Typography variant="p">

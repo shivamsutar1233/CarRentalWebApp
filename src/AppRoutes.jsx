@@ -15,7 +15,7 @@ import CompleteProfile from "./pages/CompleteProfile";
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
   const isProfileCompleted = useSelector(
-    (state) => state?.globalState?.isProfileCompleted
+    (state) => state?.globalState?.userPreferences?.isProfileCompleted
   );
   console.log(isProfileCompleted);
   return (
