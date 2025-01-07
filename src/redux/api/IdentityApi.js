@@ -48,5 +48,5 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useRefreshUserTokenMutation,
-  useGetUserPreferencesQuery,
+  useLazyGetUserPreferencesQuery,
 } = identityApi;

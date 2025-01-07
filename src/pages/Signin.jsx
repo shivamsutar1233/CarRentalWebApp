@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router";
 const Signin = () => {
   const [loginUser, { isLoading, data }] = useLoginUserMutation();
   const [formState, setFormState] = useState({ email: "", password: "" });
-  const [skip, setSkip] = useState(true);
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import { Box, CircularProgress, CssBaseline, Divider } from "@mui/material";
 import Footer from "./components/common/Footer";
 import { useDispatch } from "react-redux";
 import {
-  useGetUserPreferencesQuery,
+  useLazyGetUserPreferencesQuery,
   useRefreshUserTokenMutation,
 } from "./redux/api/IdentityApi";
 import {
@@ -50,7 +50,8 @@ function App() {
   );
   const dispatch = useDispatch();
   const [refreshUserToken, { isLoading }] = useRefreshUserTokenMutation();
-  const userPreferences = useGetUserPreferencesQuery();
+  const [getUserPreferences, userPreferences] =
+    useLazyGetUserPreferencesQuery();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refresh-token");
@@ -60,6 +61,9 @@ function App() {
           dispatch(setIsLoggedIn(true));
           localStorage.setItem("token", response?.data?.accessToken);
           localStorage.setItem("refresh-token", response?.data?.refreshToken);
+        })
+        .then(() => {
+          getUserPreferences();
         })
         .catch(() => {
           localStorage.clear();
@@ -71,8 +75,12 @@ function App() {
     }
   }, []);
 
+  // useEffect(() => {
+  //   dispatch(setUserPreferences(userPreferences));
+  // }, [userPreferences]);
   useMemo(() => {
-    dispatch(setUserPreferences(userPreferences.data));
+    if (userPreferences && userPreferences.data)
+      dispatch(setUserPreferences(userPreferences.data));
   }, [userPreferences.data]);
   return (
     <ThemeProvider theme={theme}>

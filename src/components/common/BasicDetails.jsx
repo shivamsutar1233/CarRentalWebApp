@@ -1,12 +1,16 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Skeleton, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setInitialProfileState,
   updateCompeleteProfileState,
 } from "../../redux/slice/CompleteProfileSlice";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import { useLazyGetUserPreferencesQuery } from "../../redux/api/IdentityApi";
+import { setUserPreferences } from "../../redux/slice/GlobalStateSlice";
 
 const BasicDetails = ({ handleNext }) => {
+  const [getUserPreferences, { data, isLoading }] =
+    useLazyGetUserPreferencesQuery();
   const { firstName, lastName, email, mobile } = useSelector(
     (state) => state?.completeProfile
   );
@@ -15,22 +19,50 @@ const BasicDetails = ({ handleNext }) => {
   );
 
   useEffect(() => {
-    dispatch(
-      setInitialProfileState({
-        ...userPreferences,
-        mobile: userPreferences.phoneNumber,
-      })
-    );
-  }, []);
+    if (!userPreferences && !data) {
+      getUserPreferences();
+    } else {
+      dispatch(setUserPreferences(data));
+    }
+  }, [data]);
 
-  const dispatch = useDispatch();
-  var regexForMobile = /^[7-9][0-9]{9}$/;
-  return (
-    <section className=" flex flex-1 flex-col">
-      <Typography variant="p">
-        Please help us to understand your basic details
-      </Typography>
-      <form className="grid grid-cols-12 gap-6 mt-6" onSubmit={handleNext}>
+  useEffect(() => {
+    if (userPreferences) {
+      dispatch(
+        setInitialProfileState({
+          ...userPreferences,
+          mobile: userPreferences.phoneNumber,
+        })
+      );
+    }
+  }, [userPreferences]);
+
+  const loadingSkeleton = () => {
+    return (
+      <Fragment>
+        <Skeleton
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6 lg:col-span-6"
+        />
+        <Skeleton
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6 lg:col-span-6"
+        />
+        <Skeleton
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6 lg:col-span-6"
+        />
+        <Skeleton
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6 lg:col-span-6"
+        />
+      </Fragment>
+    );
+  };
+
+  const getInputFields = () => {
+    return (
+      <Fragment>
         <TextField
           label="First name"
           className="col-span-12 md:col-span-6 lg:col-span-6"
@@ -108,12 +140,24 @@ const BasicDetails = ({ handleNext }) => {
             )
           }
         />
-        {/* <Button onClick={handleBack}>Back</Button> */}
+      </Fragment>
+    );
+  };
+  const dispatch = useDispatch();
+  var regexForMobile = /^[7-9][0-9]{9}$/;
+  return (
+    <section className=" flex flex-1 flex-col">
+      <Typography variant="p">
+        Please help us to understand your basic details
+      </Typography>
+      <form className="grid grid-cols-12 gap-6 mt-6" onSubmit={handleNext}>
+        {isLoading ? loadingSkeleton() : getInputFields()}
         <section className="col-span-12 flex justify-end">
           <Button
             variant="contained"
             type="submit"
             sx={{ textTransform: "none" }}
+            disabled={isLoading}
           >
             Next
           </Button>
