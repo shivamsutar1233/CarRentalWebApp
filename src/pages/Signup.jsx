@@ -2,12 +2,19 @@ import { Link, TextField } from "@mui/material";
 import { useState } from "react";
 import { useRegisterUserMutation } from "../redux/api/IdentityApi";
 import { LoadingButton } from "@mui/lab";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [registerUser, { isLoading, data, error }] = useRegisterUserMutation();
   const [formState, setFormState] = useState({ email: "", password: "" });
   const handleSubmit = async () => {
-    await registerUser(formState);
+    await registerUser(formState)
+      .then(() => {
+        toast.success("Onboarded successfully");
+      })
+      .catch(() => {
+        toast.error("Something went wrong");
+      });
   };
   return (
     <section className="flex flex-grow flex-col justify-center items-center py-48 gap-4">
@@ -28,6 +35,7 @@ const Signup = () => {
             type="email"
             helperText=""
             required
+            disabled={isLoading}
             aria-label="signup email"
             value={formState.email}
             onChange={(e) =>
@@ -42,6 +50,7 @@ const Signup = () => {
             type="password"
             helperText=""
             required
+            disabled={isLoading}
             aria-label="Signup-password"
             value={formState.password}
             onChange={(e) =>
