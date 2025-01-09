@@ -3,7 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const bookingApi = createApi({
   reducerPath: "bookingApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://carental.alphasquare.in/api/Booking",
+    baseUrl:
+      "car-rental-web-g4h8g7habmawhhcr.centralindia-01.azurewebsites.net/api/Booking",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {
