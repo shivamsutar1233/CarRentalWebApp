@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   Environment,
@@ -19,7 +19,6 @@ function Model(props) {
 
 export default function Render3DModel({ name = "scorpio" }) {
   const theme = useTheme();
-  console.log(theme.palette.mode);
   return (
     <Suspense
       fallback={

@@ -20,7 +20,6 @@ import { Fragment, useRef, useState } from "react";
 import { LoadingButton } from "@mui/lab";
 import dayjs from "dayjs";
 import { useSaveBookingMutation } from "../redux/api/BookingApi";
-import utc from "dayjs/plugin/utc";
 import { displayRazorPay } from "../components/common/PaymentGateway";
 const BookCar = () => {
   const [searchParams] = useSearchParams();
@@ -39,14 +38,6 @@ const BookCar = () => {
     useSaveBookingMutation();
 
   const handleSubmit = (paymentId) => {
-    // e.preventDefault();
-    console.log(paymentId);
-    console.log(formRef);
-    console.log(pAddress);
-    console.log(dAddress);
-    console.log(dDate.toString());
-    console.log(pDate);
-    console.log(dayjs.extend(utc).utc().format());
     let data = {
       carId: carId,
       pickupAddress: pAddress,

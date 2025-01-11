@@ -23,7 +23,6 @@ const AppRoutes = () => {
   const isProfileCompleted = useSelector(
     (state) => state?.globalState?.userPreferences?.isProfileCompleted
   );
-  console.log(isProfileCompleted);
   return (
     <Routes>
       <Route path="/" index element={<Home />} />

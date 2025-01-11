@@ -55,7 +55,6 @@ const CreateEditCar = () => {
   const handleFileUpdload = async (event) => {
     event.preventDefault();
     const files = inputFileRef.current.files;
-    console.log(files);
     let fileUploads = [];
     Object.values(files).map(
       (file) =>
@@ -71,7 +70,6 @@ const CreateEditCar = () => {
     setIsFilesUploading(true);
     Promise.all(fileUploads).then((res) => {
       setIsFilesUploading(false);
-      console.log(res);
       setUploadedFileNames((prev) => [...prev, ...res]);
     });
   };
