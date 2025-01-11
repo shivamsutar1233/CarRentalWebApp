@@ -7,12 +7,16 @@ import {
   CardMedia,
   Chip,
   Grid2,
+  IconButton,
   Rating,
   Skeleton,
   Typography,
 } from "@mui/material";
 import LocalGasStationSharpIcon from "@mui/icons-material/LocalGasStationSharp";
 import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
+import EditIcon from "@mui/icons-material/Edit";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 const StyledCard = ({ car, handleBooking }) => {
   const {
     make,
@@ -26,6 +30,10 @@ const StyledCard = ({ car, handleBooking }) => {
     carType,
     id,
   } = car;
+  const roles = useSelector(
+    (state) => state?.globalState?.userPreferences?.roles
+  );
+  const navigate = useNavigate();
   return (
     <Card>
       <CardActionArea onClick={() => console.log("Primary action")}>
@@ -102,9 +110,22 @@ const StyledCard = ({ car, handleBooking }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={() => handleBooking(id)}>
-          Book now
-        </Button>
+        <section className=" flex justify-between items-center w-full">
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => handleBooking(id)}
+          >
+            Book now
+          </Button>
+          {roles?.includes("Admin") && (
+            <a href={`/CreateEditCar?carId=${id}`} target="_blank">
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+            </a>
+          )}
+        </section>
       </CardActions>
     </Card>
   );

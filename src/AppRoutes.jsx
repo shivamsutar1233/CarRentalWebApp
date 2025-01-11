@@ -17,7 +17,9 @@ import Unauthorized from "./pages/Unauthorized";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
-  const { roles } = useSelector((state) => state?.globalState?.userPreferences);
+  const roles = useSelector(
+    (state) => state?.globalState?.userPreferences?.roles
+  );
   const isProfileCompleted = useSelector(
     (state) => state?.globalState?.userPreferences?.isProfileCompleted
   );
