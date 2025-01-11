@@ -24,7 +24,6 @@ import utc from "dayjs/plugin/utc";
 import { displayRazorPay } from "../components/common/PaymentGateway";
 const BookCar = () => {
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("carId"));
   const carId = searchParams.get("carId");
   const { data, isLoading } = useGetCarByIdQuery(carId);
   const [isRoundTrip, setIsRoundTrip] = useState(true);

@@ -4,7 +4,15 @@ export const carApi = createApi({
   reducerPath: "carApi",
   baseQuery: fetchBaseQuery({
     baseUrl:
-      "car-rental-web-g4h8g7habmawhhcr.centralindia-01.azurewebsites.net/api/cars",
+      "https://car-rental-web-g4h8g7habmawhhcr.centralindia-01.azurewebsites.net/api/cars",
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     getApplicationCars: builder.query({
@@ -17,7 +25,18 @@ export const carApi = createApi({
         url: `/${id}`,
       }),
     }),
+    saveCar: builder.mutation({
+      query: (body) => ({
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetApplicationCarsQuery, useGetCarByIdQuery } = carApi;
+export const {
+  useGetApplicationCarsQuery,
+  useGetCarByIdQuery,
+  useLazyGetCarByIdQuery,
+  useSaveCarMutation,
+} = carApi;

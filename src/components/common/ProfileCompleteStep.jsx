@@ -29,6 +29,7 @@ const ProfileCompleteStep = () => {
     isKycVerified,
     emailConfirmed: isEmailVerified,
     phoneNumberConfirmed: isPhoneNumberVerified,
+    isProfileCompleted: true,
   };
   useEffect(() => {
     updateUserPreferences(completeProfileBody).then(() => {
