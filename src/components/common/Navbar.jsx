@@ -45,6 +45,10 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       name: "Bookings",
       link: "/Bookings",
     },
+    {
+      name: "Profile",
+      link: "/Profile",
+    },
   ];
 
   const navLinksComponent = () => {
