@@ -1,15 +1,22 @@
 import { Link, TextField } from "@mui/material";
 import { useState } from "react";
-import { useLoginUserMutation } from "../redux/api/IdentityApi";
+import {
+  useLazyGetUserPreferencesQuery,
+  useLoginUserMutation,
+} from "../redux/api/IdentityApi";
 import { useDispatch } from "react-redux";
-import { setIsLoggedIn } from "../redux/slice/GlobalStateSlice";
+import {
+  setIsLoggedIn,
+  setUserPreferences,
+} from "../redux/slice/GlobalStateSlice";
 import { LoadingButton } from "@mui/lab";
 import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Signin = () => {
-  const [loginUser, { isLoading, data }] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const [formState, setFormState] = useState({ email: "", password: "" });
+  const [getUserPreferences] = useLazyGetUserPreferencesQuery();
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -18,12 +25,14 @@ const Signin = () => {
   const handleSubmit = async () => {
     await loginUser(formState)
       .then((res) => {
-        dispatch(setIsLoggedIn(true));
         localStorage.setItem("token", res?.data?.accessToken);
         localStorage.setItem("refresh-token", res?.data?.refreshToken);
         if (location.pathname === "/Signin") navigate("/");
       })
-      .then(() => {
+      .then(async () => await getUserPreferences())
+      .then((res) => {
+        dispatch(setIsLoggedIn(true));
+        dispatch(setUserPreferences(res.data));
         toast.success("Logged in successfully");
       })
       .catch(() => {
@@ -31,7 +40,6 @@ const Signin = () => {
         dispatch(setIsLoggedIn(false));
       });
   };
-
   return (
     <section className="flex flex-grow flex-col justify-center items-center py-48 gap-4 min-h-screen">
       <section className=" text-base font-semibold p-4">Welcome back</section>

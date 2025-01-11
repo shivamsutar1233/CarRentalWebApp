@@ -75,9 +75,6 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(setUserPreferences(userPreferences));
-  // }, [userPreferences]);
   useMemo(() => {
     if (userPreferences && userPreferences.data)
       dispatch(setUserPreferences(userPreferences.data));
