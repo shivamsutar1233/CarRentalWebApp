@@ -11,8 +11,13 @@ import { useState } from "react";
 import BasicProfileDetails from "../components/common/BasicProfileDetails";
 import ChangeEmail from "../components/common/ChangeEmail";
 import ChangeMobile from "../components/common/ChangeMobile";
+import { useNavigate } from "react-router";
+import { clearGlobalState } from "../redux/slice/GlobalStateSlice";
+import { useDispatch } from "react-redux";
 const Profile = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const theme = useTheme();
   const activeClass = {
     backgroundColor: theme.palette.primary.main,
@@ -36,16 +41,22 @@ const Profile = () => {
       id: 3,
       label: "Change password",
     },
+  ];
+  const linkSteps = [
     {
-      id: 4,
+      id: 10,
       label: " My bookings",
+      link: "/Bookings",
+      onClick: () => {},
     },
     {
-      id: 5,
+      id: 11,
       label: "Signout",
+      link: "/",
+
+      onClick: () => handleSignout(),
     },
   ];
-
   const getActiveStepLabel = () => {
     return profileSteps.find((step) => step.id === activeStep).label;
   };
@@ -60,7 +71,10 @@ const Profile = () => {
         return <ChangeMobile />;
     }
   };
-
+  const handleSignout = () => {
+    localStorage.clear();
+    dispatch(clearGlobalState());
+  };
   return (
     <section className="pt-20 py-6">
       <Divider />
@@ -88,6 +102,19 @@ const Profile = () => {
               <ListItem
                 className=" rounded-sm cursor-pointer"
                 onClick={() => setActiveStep(step.id)}
+                sx={activeStep === step.id && activeClass}
+                key={step.id}
+              >
+                {step.label}
+              </ListItem>
+            ))}
+            {linkSteps.map((step) => (
+              <ListItem
+                className=" rounded-sm cursor-pointer"
+                onClick={() => {
+                  step.onClick && step.onClick();
+                  navigate(step.link);
+                }}
                 sx={activeStep === step.id && activeClass}
                 key={step.id}
               >
