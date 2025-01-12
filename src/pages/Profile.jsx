@@ -1,20 +1,30 @@
 import {
   Divider,
-  Icon,
   List,
   ListItem,
+  Menu,
+  MenuItem,
   Typography,
   useTheme,
 } from "@mui/material";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useState } from "react";
 import BasicProfileDetails from "../components/common/BasicProfileDetails";
 import ChangeEmail from "../components/common/ChangeEmail";
 import ChangeMobile from "../components/common/ChangeMobile";
 import { useNavigate } from "react-router";
-import { clearGlobalState } from "../redux/slice/GlobalStateSlice";
-import { useDispatch } from "react-redux";
+import {
+  clearGlobalState,
+  setProfileElementAnchor,
+} from "../redux/slice/GlobalStateSlice";
+import { useDispatch, useSelector } from "react-redux";
+import img from "../assets/images/2.jpg";
 const Profile = () => {
+  const userPreferences = useSelector(
+    (state) => state?.globalState?.userPreferences
+  );
+  const profileAnchor = useSelector(
+    (state) => state?.globalState?.profileAnchor
+  );
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -79,24 +89,27 @@ const Profile = () => {
     <section className="pt-20 py-6">
       <Divider />
       <section
-        className=" px-[24rem] flex flex-1  items-center gap-12 pb-20 pt-12"
+        className=" sm:px-6 md:px-12 lg:px-24 xl:48 2xl:px-96 flex flex-1  items-center gap-12 pb-20 pt-12"
         style={{
           background: theme.palette.primary.main,
           color: theme.palette.primary.contrastText,
         }}
       >
-        <section className="h-[8rem] w-[8rem]">
-          <Icon className="!w-full !h-full">
-            <AccountBoxIcon className="!w-full !h-full" />
-          </Icon>
+        <section className="h-[8rem] w-[8rem] ">
+          <img className="!w-full !h-full rounded-full" src={img} />
+          {/* <Icon className="!w-full !h-full !rounded-full">
+            <AccountBoxIcon className="!w-full !h-full !rounded-full" />
+          </Icon> */}
         </section>
         <section>
-          <Typography variant="h6">Shivam Ashok Sutar</Typography>
+          <Typography variant="h6">
+            {userPreferences?.firstName + " " + userPreferences?.lastName}
+          </Typography>
         </section>
       </section>
       <Divider />
       <section className=" flex  flex-1 sm:px-6 md:px-12 lg:px-24 xl:48 2xl:px-96 justify-center items-start gap-6 relative py-2">
-        <section className=" h-96 w-72">
+        <section className=" hidden md:block h-96 w-72">
           <List>
             {profileSteps.map((step) => (
               <ListItem
@@ -138,6 +151,36 @@ const Profile = () => {
           <section className="p-4">{getActiveStep()}</section>
         </section>
       </section>
+      <Menu
+        anchorEl={profileAnchor}
+        open={Boolean(profileAnchor)}
+        onClose={() => dispatch(setProfileElementAnchor(null))}
+        onClick={() => dispatch(setProfileElementAnchor(null))}
+      >
+        {profileSteps.map((step) => (
+          <MenuItem
+            className=" cursor-pointer"
+            onClick={() => setActiveStep(step.id)}
+            sx={activeStep === step.id && activeClass}
+            key={step.id}
+          >
+            {step.label}
+          </MenuItem>
+        ))}
+        {linkSteps.map((step) => (
+          <MenuItem
+            className=" cursor-pointer"
+            onClick={() => {
+              step.onClick && step.onClick();
+              navigate(step.link);
+            }}
+            sx={activeStep === step.id && activeClass}
+            key={step.id}
+          >
+            {step.label}
+          </MenuItem>
+        ))}
+      </Menu>
     </section>
   );
 };

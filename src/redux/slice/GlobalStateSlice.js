@@ -13,6 +13,9 @@ const GlobalStateSlice = createSlice({
     setUserPreferences: (state, action) => {
       return { ...state, userPreferences: { ...action.payload } };
     },
+    setProfileElementAnchor: (state, action) => {
+      return { ...state, profileAnchor: action.payload };
+    },
     clearGlobalState: () => {
       return {};
     },
@@ -24,6 +27,7 @@ export const {
   clearGlobalState,
   setIsProfileComplted,
   setUserPreferences,
+  setProfileElementAnchor,
 } = GlobalStateSlice.actions;
 
 export default GlobalStateSlice.reducer;

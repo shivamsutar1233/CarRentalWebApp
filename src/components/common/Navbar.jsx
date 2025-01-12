@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Divider,
   IconButton,
@@ -8,19 +9,26 @@ import {
   Typography,
   useColorScheme,
 } from "@mui/material";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { Fragment, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { useDispatch, useSelector } from "react-redux";
-import { clearGlobalState } from "../../redux/slice/GlobalStateSlice";
+import {
+  clearGlobalState,
+  setProfileElementAnchor,
+} from "../../redux/slice/GlobalStateSlice";
 const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const [showSideBar, setShowSideBar] = useState(false),
     isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn),
     dispatch = useDispatch(),
+    userPreferences = useSelector(
+      (state) => state?.globalState?.userPreferences
+    ),
+    location = useLocation(),
     { mode, setMode } = useColorScheme();
-
+  console.log(location);
   const navLinks = [
     {
       name: "Home",
@@ -226,6 +234,26 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
         <section className="hidden md:block">
           {getApplicationThemeComponent()}
         </section>
+        {isLoggedIn && location.pathname === "/Profile" && (
+          <section className="block md:hidden">
+            <IconButton
+              onClick={(e) =>
+                dispatch(setProfileElementAnchor(e.currentTarget))
+              }
+            >
+              <Avatar sx={{ width: "2.2rem", height: "2.2rem" }}>
+                {userPreferences?.firstName
+                  .toString()
+                  .substring(0, 1)
+                  .toUpperCase() +
+                  userPreferences?.lastName
+                    .toString()
+                    .substring(0, 1)
+                    .toUpperCase()}
+              </Avatar>
+            </IconButton>
+          </section>
+        )}
         <section className="block md:hidden">
           <IconButton onClick={() => setShowSideBar(true)}>
             <MenuIcon />
