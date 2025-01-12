@@ -17,6 +17,46 @@ const Profile = () => {
     color: theme.palette.primary.contrastText,
   };
 
+  const profileSteps = [
+    {
+      id: 0,
+      label: "Basic details",
+    },
+    {
+      id: 1,
+      label: "Change email",
+    },
+    {
+      id: 2,
+      label: " Change mobile",
+    },
+    {
+      id: 3,
+      label: "Change password",
+    },
+    {
+      id: 4,
+      label: " My bookings",
+    },
+    {
+      id: 5,
+      label: "Signout",
+    },
+  ];
+
+  const getActiveStepLabel = () => {
+    return profileSteps.find((step) => step.id === activeStep).label;
+  };
+
+  const getActiveStep = () => {
+    switch (activeStep) {
+      case 0:
+        return <BasicProfileDetails />;
+      case 1:
+        return null;
+    }
+  };
+
   return (
     <section className="pt-20 py-6">
       <Divider />
@@ -40,48 +80,16 @@ const Profile = () => {
       <section className=" flex  flex-1 sm:px-6 md:px-12 lg:px-24 xl:48 2xl:px-96 justify-center items-start gap-6 relative py-2">
         <section className=" h-96 w-72">
           <List>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(0)}
-              sx={activeStep === 0 && activeClass}
-            >
-              Basic details
-            </ListItem>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(1)}
-              sx={activeStep === 1 && activeClass}
-            >
-              Change email
-            </ListItem>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(2)}
-              sx={activeStep === 2 && activeClass}
-            >
-              Change mobile
-            </ListItem>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(3)}
-              sx={activeStep === 3 && activeClass}
-            >
-              Change password
-            </ListItem>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(4)}
-              sx={activeStep === 4 && activeClass}
-            >
-              My bookings
-            </ListItem>
-            <ListItem
-              className=" rounded-sm cursor-pointer"
-              onClick={() => setActiveStep(5)}
-              sx={activeStep === 5 && activeClass}
-            >
-              Signout
-            </ListItem>
+            {profileSteps.map((step) => (
+              <ListItem
+                className=" rounded-sm cursor-pointer"
+                onClick={() => setActiveStep(step.id)}
+                sx={activeStep === step.id && activeClass}
+                key={step.id}
+              >
+                {step.label}
+              </ListItem>
+            ))}
           </List>
         </section>
         <section
@@ -93,12 +101,10 @@ const Profile = () => {
             className="p-4"
             sx={{ color: theme.palette.primary.dark }}
           >
-            Basic details
+            {getActiveStepLabel()}
           </Typography>
           <Divider />
-          <section className="p-4">
-            <BasicProfileDetails />
-          </section>
+          <section className="p-4">{getActiveStep()}</section>
         </section>
       </section>
     </section>

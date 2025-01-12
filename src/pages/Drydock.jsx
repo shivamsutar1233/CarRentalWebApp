@@ -1,7 +1,8 @@
-import UploadImage from "../components/common/UploadImage";
+// import UploadImage from "../components/common/UploadImage";
 
 const Drydock = () => {
-  return <UploadImage />;
+  return;
+  // return <UploadImage />;
 };
 
 export default Drydock;

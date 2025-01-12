@@ -17,29 +17,51 @@ const BasicProfileDetails = () => {
       <Divider />
       <section className=" flex flex-1 justify-start items-center gap-44 py-2">
         <section className="flex w-24">Email</section>
-        <section>{userPreferences?.email}</section>
+        <section className="flex gap-1">
+          {userPreferences?.email}
+          {userPreferences?.emailConfirmed ? (
+            <Icon className="!flex">
+              <VerifiedIcon fontSize="small" />
+            </Icon>
+          ) : (
+            <Icon className="!flex">
+              <GppBadIcon fontSize="small" />
+            </Icon>
+          )}
+        </section>
       </section>
       <Divider />
       <section className=" flex flex-1 justify-start items-center gap-44 py-2">
         <section className="flex w-24">Mobile</section>
-        <section>+91-{userPreferences?.phoneNumber}</section>
+        <section className="flex gap-1">
+          +91-{userPreferences?.phoneNumber}
+          {userPreferences?.emailConfirmed ? (
+            <Icon className="!flex">
+              <VerifiedIcon fontSize="small" />
+            </Icon>
+          ) : (
+            <Icon className="!flex">
+              <GppBadIcon fontSize="small" />
+            </Icon>
+          )}
+        </section>
       </section>
       <Divider />
       <section className=" flex flex-1 justify-start items-center gap-44 py-2">
         <section className="flex w-24">Kyc verified</section>
         <section className="flex">
           {userPreferences?.isKycVerified ? (
-            <section className="flex">
+            <section className="flex gap-1">
               verified
               <Icon className="!flex">
-                <VerifiedIcon />
+                <VerifiedIcon fontSize="small" />
               </Icon>
             </section>
           ) : (
-            <section className="flex">
-              Not verified{" "}
+            <section className="flex gap-1">
+              Not verified
               <Icon className="!flex">
-                <GppBadIcon />
+                <GppBadIcon fontSize="small" />
               </Icon>
             </section>
           )}
