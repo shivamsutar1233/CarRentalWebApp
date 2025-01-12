@@ -9,6 +9,8 @@ import {
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useState } from "react";
 import BasicProfileDetails from "../components/common/BasicProfileDetails";
+import ChangeEmail from "../components/common/ChangeEmail";
+import ChangeMobile from "../components/common/ChangeMobile";
 const Profile = () => {
   const [activeStep, setActiveStep] = useState(0);
   const theme = useTheme();
@@ -53,7 +55,9 @@ const Profile = () => {
       case 0:
         return <BasicProfileDetails />;
       case 1:
-        return null;
+        return <ChangeEmail />;
+      case 2:
+        return <ChangeMobile />;
     }
   };
 

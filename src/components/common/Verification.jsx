@@ -23,11 +23,9 @@ const Verification = ({
 
   const otpLogic = () => {
     setIsOTPSent(true);
-    setIsResendOTPSent(false);
     onOtpSend && onOtpSend();
     setTimeout(() => {
       setIsResendOTPSent(true);
-      setIsOTPSent(false);
     }, 6 * 1000);
   };
   useEffect(() => {
@@ -69,7 +67,7 @@ const Verification = ({
           </Button>
         )}
       </section>
-      {!isVerified && (
+      {!isVerified && isOTPSent && (
         <section className="grid grid-cols-12 col-span-12 gap-1">
           <TextField
             label="OTP"
