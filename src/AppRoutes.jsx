@@ -20,8 +20,11 @@ const AppRoutes = () => {
   const roles = useSelector(
     (state) => state?.globalState?.userPreferences?.roles
   );
+  const userPreferences = useSelector(
+    (state) => state?.globalState?.userPreferences
+  );
   const isProfileCompleted = useSelector(
-    (state) => state?.globalState?.userPreferences?.isProfileCompleted
+    (state) => state?.globalState?.isProfileCompleted
   );
   return (
     <Routes>
@@ -36,7 +39,7 @@ const AppRoutes = () => {
         path="/BookCar"
         element={
           isLoggedIn ? (
-            isProfileCompleted ? (
+            isProfileCompleted || userPreferences?.isProfileCompleted ? (
               <BookCar />
             ) : (
               <CompleteProfile />

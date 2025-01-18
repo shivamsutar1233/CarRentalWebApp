@@ -28,7 +28,6 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     ),
     location = useLocation(),
     { mode, setMode } = useColorScheme();
-  console.log(location);
   const navLinks = [
     {
       name: "Home",
@@ -242,14 +241,16 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
               }
             >
               <Avatar sx={{ width: "2.2rem", height: "2.2rem" }}>
-                {userPreferences?.firstName
-                  .toString()
-                  .substring(0, 1)
-                  .toUpperCase() +
-                  userPreferences?.lastName
-                    .toString()
-                    .substring(0, 1)
-                    .toUpperCase()}
+                {userPreferences.firstName && userPreferences.lastName
+                  ? userPreferences?.firstName
+                      .toString()
+                      .substring(0, 1)
+                      .toUpperCase() +
+                    userPreferences?.lastName
+                      .toString()
+                      .substring(0, 1)
+                      .toUpperCase()
+                  : "SS"}
               </Avatar>
             </IconButton>
           </section>

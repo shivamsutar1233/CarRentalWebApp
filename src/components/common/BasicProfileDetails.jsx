@@ -11,7 +11,9 @@ const BasicProfileDetails = () => {
       <section className=" flex flex-1 justify-start items-center gap-44 py-2">
         <section className="flex w-24">Name</section>
         <section>
-          {userPreferences?.firstName + " " + userPreferences?.lastName}
+          {userPreferences.firstName &&
+            userPreferences?.firstName + " " + userPreferences.lastName &&
+            userPreferences?.lastName}
         </section>
       </section>
       <Divider />

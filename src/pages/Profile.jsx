@@ -103,7 +103,9 @@ const Profile = () => {
         </section>
         <section>
           <Typography variant="h6">
-            {userPreferences?.firstName + " " + userPreferences?.lastName}
+            {userPreferences.firstName &&
+              userPreferences?.firstName + " " + userPreferences.lastName &&
+              userPreferences?.lastName}
           </Typography>
         </section>
       </section>
