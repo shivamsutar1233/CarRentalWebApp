@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   IconButton,
+  Link,
   List,
   ListItem,
   SwipeableDrawer,
@@ -31,19 +32,11 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const navLinks = [
     {
       name: "Home",
-      link: "/",
-    },
-    {
-      name: "About",
-      link: "/About",
-    },
-    {
-      name: "Contact",
-      link: "/Contact",
+      link: { path: "/" },
     },
     {
       name: "Cars",
-      link: "/Cars",
+      link: { path: "/Cars" },
     },
   ];
 
@@ -124,6 +117,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
             </ListItem>
           </Fragment>
         )}
+
         {isLoggedIn && (
           <ListItem>
             <NavLink to={"/Signin"} onClick={() => setShowSideBar(false)}>
@@ -190,6 +184,20 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       <section className="flex text ">
         <nav className="hidden md:flex md:gap-6">
           {navLinksComponent()}
+          <ListItem key={"About"}>
+            <Link href="#About" underline="none">
+              <Typography variant="p" color="primary">
+                About
+              </Typography>
+            </Link>
+          </ListItem>
+          <ListItem key={"Contact"}>
+            <Link href="#Contact" underline="none">
+              <Typography variant="p" color="primary">
+                Contact
+              </Typography>
+            </Link>
+          </ListItem>
           {isLoggedIn && protectedNavLinksComponent()}
         </nav>
       </section>
