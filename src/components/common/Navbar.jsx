@@ -185,14 +185,14 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
         <nav className="hidden md:flex md:gap-6">
           {navLinksComponent()}
           <ListItem key={"About"}>
-            <Link href="#About" underline="none">
+            <Link href="/#About" underline="none">
               <Typography variant="p" color="primary">
                 About
               </Typography>
             </Link>
           </ListItem>
           <ListItem key={"Contact"}>
-            <Link href="#Contact" underline="none">
+            <Link href="/#Contact" underline="none">
               <Typography variant="p" color="primary">
                 Contact
               </Typography>

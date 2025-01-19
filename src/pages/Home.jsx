@@ -1,5 +1,6 @@
 import StyledCarousel from "../components/common/Carousel";
 import { images } from "../util/UtilityFunctions";
+import About from "../components/common/About";
 function Home() {
   return (
     <section
@@ -10,8 +11,8 @@ function Home() {
         <StyledCarousel data={images} interval={1000} />
         <section className=" h-80">Features</section>
         <section className=" h-80">Testimonials</section>
-        <section id="About" className=" h-80">
-          About
+        <section id="About" className="">
+          <About />
         </section>
         <section id="Contact" className=" h-80">
           Contact
