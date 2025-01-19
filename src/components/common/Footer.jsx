@@ -85,7 +85,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-4 py-6 flex flex-col gap-2 justify-between">
+    <footer className="px-4 py-6 flex flex-col gap-2 justify-between h-[20rem]">
       <section className=" grid grid-cols-12 ">
         <section className=" col-span-12 lg:col-span-3">
           {getCompanyNameSection()}

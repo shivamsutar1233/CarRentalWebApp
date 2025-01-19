@@ -31,7 +31,7 @@ const About = () => {
     return <Typography variant="p">{props.Para}</Typography>;
   };
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 2xl:px-80 py-6">
+    <section className="pt-20  px-4 sm:px-8 md:px-16 lg:px-32 xl:px-64 2xl:px-80 py-6 min-h-screen">
       <Typography
         variant="h4"
         className=" text-center flex justify-center items-center"

@@ -3,7 +3,6 @@ import {
   Button,
   Divider,
   IconButton,
-  Link,
   List,
   ListItem,
   SwipeableDrawer,
@@ -37,6 +36,14 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
     {
       name: "Cars",
       link: "/Cars",
+    },
+    {
+      name: "About",
+      link: "/About",
+    },
+    {
+      name: "Contact",
+      link: "/Contact",
     },
   ];
 
@@ -184,7 +191,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
       <section className="flex text ">
         <nav className="hidden md:flex md:gap-6">
           {navLinksComponent()}
-          <ListItem key={"About"}>
+          {/* <ListItem key={"About"}>
             <Link href="/#About" underline="none">
               <Typography variant="p" color="primary">
                 About
@@ -197,7 +204,7 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
                 Contact
               </Typography>
             </Link>
-          </ListItem>
+          </ListItem> */}
           {isLoggedIn && protectedNavLinksComponent()}
         </nav>
       </section>

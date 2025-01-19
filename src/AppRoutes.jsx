@@ -12,6 +12,8 @@ import CompleteProfile from "./pages/CompleteProfile";
 import Drydock from "./pages/Drydock";
 import CreateEditCar from "./pages/CreateEditCar";
 import Unauthorized from "./pages/Unauthorized";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
@@ -27,6 +29,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" index element={<Home />} />
+      <Route path="/About" index element={<About />} />
+      <Route path="/Contact" index element={<Contact />} />
       <Route path="/Signup" element={<Signup />} />
       <Route path="/Signin" element={isLoggedIn ? <Home /> : <Signin />} />
       <Route path="/Drydock" element={isLoggedIn ? <Drydock /> : <Signin />} />
