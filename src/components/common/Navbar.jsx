@@ -32,11 +32,11 @@ const Navbar = ({ setIsDarkMode, isDarkMode }) => {
   const navLinks = [
     {
       name: "Home",
-      link: { path: "/" },
+      link: "/",
     },
     {
       name: "Cars",
-      link: { path: "/Cars" },
+      link: "/Cars",
     },
   ];
 
