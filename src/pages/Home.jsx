@@ -1,5 +1,4 @@
-import StyledCarousel from "../components/common/Carousel";
-import { images } from "../util/UtilityFunctions";
+import Testimonials from "../components/common/Testimonials";
 function Home() {
   return (
     <section
@@ -7,9 +6,11 @@ function Home() {
     "
     >
       <section className="top-0">
-        <StyledCarousel data={images} interval={1000} />
+        {/* <StyledCarousel data={images} interval={1000} /> */}
         <section className=" h-80">Features</section>
-        <section className=" h-80">Testimonials</section>
+        <section className="py-24">
+          <Testimonials />
+        </section>
       </section>
     </section>
   );
