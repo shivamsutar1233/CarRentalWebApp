@@ -1,9 +1,9 @@
-import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import {
   Card,
   CardActionArea,
   CardContent,
-  Icon,
+  CardMedia,
+  Rating,
   Typography,
 } from "@mui/material";
 
@@ -17,17 +17,37 @@ const Testimonials = () => {
       <section className=" w-[99%]">
         <Card>
           <CardActionArea>
-            <Icon>
-              <AccountBoxRoundedIcon />
-            </Icon>
+            <CardMedia
+              component="img"
+              className=" w-96 "
+              image="https://i.ibb.co/Gs41NxR/testimonial.jpg"
+              alt="testimonial"
+            />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                className="flex justify-between"
+              >
                 Alpha Sqaure
+                <span>
+                  <Rating
+                    readOnly
+                    defaultValue={Math.random() * 5}
+                    precision={0.1}
+                    size="small"
+                  />
+                </span>
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error
-                ut corrupti enim earum fugiat necessitatibus odio. Id aliquid
-                fugit nesciunt molestias magni ducimus voluptatibus?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus
+                at et sequi perferendis quaerat cumque aut voluptatum vel
+                doloribus distinctio earum consequatur dignissimos porro, eaque,
+                rerum magnam ducimus ipsum enim, ipsa deserunt accusamus a
+                exercitationem quis incidunt. Rerum, dolorem dolorum dignissimos
+                id, saepe praesentium sit, cupiditate libero similique voluptate
+                ea?
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -42,7 +62,7 @@ const Testimonials = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    // centerMode: true,
+    adaptiveHeight: true,
     responsive: [
       {
         breakpoint: 1280,
@@ -73,7 +93,16 @@ const Testimonials = () => {
     ],
   };
   return (
-    <section className="px-4 sm:px-8 md:px-24 lg:px-28 xl:px-16 2xl:px-48">
+    <section className="px-4 sm:px-8 md:px-24 lg:px-28 xl:px-16 2xl:px-56 overflow-hidden py-6">
+      <Typography
+        variant="h5"
+        className=" text-center flex justify-center items-center p-6"
+      >
+        Our happy customers
+        <Typography variant="h4" color="secondary">
+          .
+        </Typography>
+      </Typography>
       <Slider {...settings}>
         <SingleCard />
         <SingleCard />

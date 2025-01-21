@@ -41,7 +41,7 @@ const StyledCard = ({ car, handleBooking }) => {
           component="img"
           className=" h-[15rem] w-[15rem]"
           image="https://i.ibb.co/wYrLLNR/demo-car.jpg"
-          alt="green iguana"
+          alt="car-image"
         />
         <CardContent>
           <Grid2 container>
