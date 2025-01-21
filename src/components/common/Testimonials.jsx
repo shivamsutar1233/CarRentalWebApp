@@ -42,16 +42,15 @@ const Testimonials = () => {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    // variableWidth: true,
     // centerMode: true,
-    // infinite: true,
-    // dots: true,
     responsive: [
       {
         breakpoint: 1280,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
+          infinite: true,
+          dots: true,
         },
       },
       {
@@ -60,6 +59,8 @@ const Testimonials = () => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          infinite: true,
+          dots: true,
         },
       },
       {
