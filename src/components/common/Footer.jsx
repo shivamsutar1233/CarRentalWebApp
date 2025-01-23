@@ -6,7 +6,7 @@ import { grey } from "@mui/material/colors";
 const Footer = () => {
   const getSocialMediaSection = () => {
     return (
-      <section className=" flex items-center gap-2">
+      <section className=" flex items-center gap-2 justify-end">
         <Typography variant="p" className="pr-2">
           Follow us
         </Typography>
@@ -96,7 +96,7 @@ const Footer = () => {
         <section className=" col-span-6 lg:col-span-3">
           {getServicesSection()}
         </section>
-        <section className=" col-span-12 lg:col-span-3">
+        <section className=" col-span-12 lg:col-span-3 justify-end">
           {getSocialMediaSection()}
         </section>
       </section>

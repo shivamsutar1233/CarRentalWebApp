@@ -1,4 +1,6 @@
 import {
+  Box,
+  CircularProgress,
   Divider,
   List,
   ListItem,
@@ -7,7 +9,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BasicProfileDetails from "../components/common/BasicProfileDetails";
 import ChangeEmail from "../components/common/ChangeEmail";
 import ChangeMobile from "../components/common/ChangeMobile";
@@ -15,10 +17,23 @@ import { useNavigate } from "react-router";
 import {
   clearGlobalState,
   setProfileElementAnchor,
+  setUserPreferences,
 } from "../redux/slice/GlobalStateSlice";
 import { useDispatch, useSelector } from "react-redux";
 import img from "../assets/images/2.jpg";
+import { useLazyGetUserPreferencesQuery } from "../redux/api/IdentityApi";
+import { toast } from "react-toastify";
 const Profile = () => {
+  const dispatch = useDispatch();
+  const [getUserPreferences, { isLoading }] = useLazyGetUserPreferencesQuery();
+
+  useEffect(() => {
+    getUserPreferences()
+      .then((res) => {
+        dispatch(setUserPreferences(res.data));
+      })
+      .catch(() => toast.error("Something went wrong"));
+  }, []);
   const userPreferences = useSelector(
     (state) => state?.globalState?.userPreferences
   );
@@ -27,7 +42,6 @@ const Profile = () => {
   );
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const theme = useTheme();
   const activeClass = {
     backgroundColor: theme.palette.primary.main,
@@ -85,7 +99,19 @@ const Profile = () => {
     localStorage.clear();
     dispatch(clearGlobalState());
   };
-  return (
+  return isLoading ? (
+    <Box
+      sx={{
+        display: "flex",
+        flex: "1",
+        minHeight: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <CircularProgress />
+    </Box>
+  ) : (
     <section className="pt-20 py-6">
       <Divider />
       <section
