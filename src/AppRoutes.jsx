@@ -14,6 +14,7 @@ import CreateEditCar from "./pages/CreateEditCar";
 import Unauthorized from "./pages/Unauthorized";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import { userRoles } from "./util/UIConstants";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
@@ -61,7 +62,7 @@ const AppRoutes = () => {
       <Route
         path="/CreateEditCar"
         element={
-          isLoggedIn && roles?.includes("Admin") ? (
+          isLoggedIn && roles?.includes(userRoles.admin) ? (
             <CreateEditCar />
           ) : (
             <Unauthorized />

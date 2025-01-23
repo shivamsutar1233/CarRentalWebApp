@@ -24,3 +24,9 @@ export const fileTypes = [
   "image/webp",
   "image/x-icon",
 ];
+
+export const userRoles = {
+  user: "User",
+  admin: "Admin",
+  owner: "Owner",
+};
