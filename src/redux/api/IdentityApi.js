@@ -17,7 +17,7 @@ export const identityApi = createApi({
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (body) => ({
-        url: `register`,
+        url: `registerUser`,
         method: "POST",
         body,
       }),
