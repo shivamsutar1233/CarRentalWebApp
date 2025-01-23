@@ -1,10 +1,10 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useGetAllBookingsQuery } from "../redux/api/BookingApi";
 import EditIcon from "@mui/icons-material/Edit";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { IconButton } from "@mui/material";
+import { useGetAllUserBookingsQuery } from "../redux/api/BookingApi";
 const Bookings = () => {
-  const { data, isLoading } = useGetAllBookingsQuery();
+  const { data, isLoading } = useGetAllUserBookingsQuery();
   const columns = [
     { field: "email", flex: 1, headerName: "Username" },
     { field: "carMake", flex: 1, headerName: "Car Make" },
