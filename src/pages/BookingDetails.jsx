@@ -79,18 +79,18 @@ const BookingsDetails = (props) => {
         <section className=" relative">
           {/* BOOKING DETAILS section  */}
           <section className=" w-full py-2 flex flex-col">
-            <Typography variant="p" className=" flex flex-col md:flex-row">
+            <Typography variant="p" className=" flex  item-center">
               Name: <span className=" ">Shivam Ashok Sutar</span>
             </Typography>
-            <Typography variant="p" className=" flex flex-col md:flex-row">
+            <Typography variant="p" className=" flex  item-center">
               Mobile Number: <span className=" ">+91-9238322323</span>
             </Typography>
-            <Typography variant="p" className=" flex flex-col md:flex-row">
+            <Typography variant="p" className=" flex  item-center">
               Email Id: <span className=" ">user@alphasquare.in</span>
             </Typography>
           </section>
           <section className=" w-full py-2 flex flex-col md:flex-row justify-between  md:items-center items-start ">
-            <Typography variant="p" className=" flex flex-col md:flex-row">
+            <Typography variant="p" className=" flex items-center">
               Booking Id: <span className=" ">{Booking?.data?.id}</span>
             </Typography>
             <LoadingButton
@@ -183,13 +183,13 @@ const BookingsDetails = (props) => {
               className={`
                     flex flex-col justify-start items-start `}
             >
-              <Typography variant="p" className=" flex flex-col md:flex-row">
+              <Typography variant="p" className=" flex items-center">
                 Driver Name: <span className=" ">Alpha Square</span>
               </Typography>
-              <Typography variant="p" className=" flex flex-col md:flex-row">
+              <Typography variant="p" className=" flex items-center">
                 Mobile Number: <span className=" ">+91-98263XXXXX</span>
               </Typography>
-              <Typography variant="p" className=" flex flex-col md:flex-row">
+              <Typography variant="p" className=" flex items-center">
                 License Number: <span className=" ">ss@sstechlab.in</span>
               </Typography>
             </section>
@@ -219,7 +219,6 @@ const BookingsDetails = (props) => {
               />
               <Button
                 variant="contained"
-                className=""
                 size="large"
                 //   onClick={() => handleAssignDriver()}
               >
