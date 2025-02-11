@@ -193,7 +193,9 @@ const BookingsDetails = (props) => {
                 License Number: <span className=" ">ss@sstechlab.in</span>
               </Typography>
             </section>
-            <section className={` flex items-center justify-start gap-4`}>
+            <section
+              className={` flex flex-col md:flex-row justify-start gap-2 py-2`}
+            >
               <Controller
                 name="drivers"
                 control={control}
@@ -203,7 +205,7 @@ const BookingsDetails = (props) => {
                     disablePortal
                     options={drivers}
                     // disabled={isLoading}
-                    sx={{ width: "20rem" }}
+                    sx={{ minWidth: "20rem" }}
                     onChange={(e, value) => onChange(value.value)}
                     renderInput={(params) => (
                       <TextField
