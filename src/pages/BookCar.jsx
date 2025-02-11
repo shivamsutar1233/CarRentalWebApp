@@ -21,6 +21,7 @@ import { LoadingButton } from "@mui/lab";
 import dayjs from "dayjs";
 import { useSaveBookingMutation } from "../redux/api/BookingApi";
 import { displayRazorPay } from "../components/common/PaymentGateway";
+import CarDetails from "../components/common/CarDetails";
 const BookCar = () => {
   const [searchParams] = useSearchParams();
   const carId = searchParams.get("carId");
@@ -58,60 +59,7 @@ const BookCar = () => {
         getLoadingBookCar()
       ) : (
         <Fragment>
-          <Grid2 container>
-            <Grid2 size={{ md: 8 }}>
-              <StyledCarousel data={images} interval={null} />
-            </Grid2>
-            <Grid2>
-              <Typography variant="p" className=" p-3 font-semibold">
-                Car details
-              </Typography>
-              <List>
-                <ListItem className=" font-semibold">
-                  Make:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.make}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Model:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.model}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Transmission:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.transmission}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Mileage:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.mileage}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Price/day:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.pricePerDay}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Fuel type:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.fuelType}
-                  </Typography>
-                </ListItem>
-                <ListItem className=" font-semibold">
-                  Car type:
-                  <Typography variant="p" className=" font-medium">
-                    {data?.carType}
-                  </Typography>
-                </ListItem>
-              </List>
-            </Grid2>
-          </Grid2>
+          <CarDetails data={data} images={images}/>
           {/* Booking Form */}
           <Grid2
             container
@@ -130,6 +78,8 @@ const BookCar = () => {
                 required
                 name="pickUpAddress"
                 value={pAddress}
+                disabled={saveLoading || isPaymentLoading}
+
                 onChange={(e) => setPAddress(e.target.value)}
               />
             </Grid2>
@@ -140,6 +90,8 @@ const BookCar = () => {
                   value={pDate}
                   label="Pickup date and time"
                   className=" w-full"
+                  disabled={saveLoading || isPaymentLoading}
+
                 />
               </LocalizationProvider>
             </Grid2>
@@ -150,6 +102,8 @@ const BookCar = () => {
                     size="small"
                     checked={isRoundTrip}
                     onChange={() => setIsRoundTrip(!isRoundTrip)}
+                    disabled={saveLoading || isPaymentLoading}
+                    
                   />
                 }
                 label="Is this roundtrip"
@@ -164,6 +118,8 @@ const BookCar = () => {
                   required
                   value={dAddress}
                   onChange={(e) => setDAddress(e.target.value)}
+                  disabled={saveLoading || isPaymentLoading}
+
                 />
               </Grid2>
             )}
@@ -175,6 +131,7 @@ const BookCar = () => {
                     value={pDate}
                     label="Drop date and time"
                     className=" w-full"
+                    disabled={saveLoading || isPaymentLoading}
                   />
                 </LocalizationProvider>
               </Grid2>

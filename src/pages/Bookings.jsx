@@ -38,7 +38,10 @@ const Bookings = () => {
                 <EditIcon />
               </IconButton>
             )}
-            <IconButton href="" target="_blank">
+            <IconButton
+              href={`/BookingDetails?bookingId=${params?.id}&carId=${params?.row.carId}`}
+              target="_blank"
+            >
               <RemoveRedEyeIcon />
             </IconButton>
           </section>

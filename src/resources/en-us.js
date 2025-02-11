@@ -34,3 +34,9 @@ export const transmissionTypes = [
   { id: 5, label: "DCT", value: 5 },
   { id: 6, label: "Other", value: 6 },
 ];
+
+export const drivers = [
+  { id: 0, label: "Alpha 1", value: 0 },
+  { id: 1, label: "Alpha 2", value: 1 },
+  { id: 2, label: "Alpha 3", value: 2 },
+];

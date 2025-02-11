@@ -15,6 +15,7 @@ import Unauthorized from "./pages/Unauthorized";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { userRoles } from "./util/UIConstants";
+import BookingsDetails from "./pages/BookingDetails";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
@@ -58,6 +59,10 @@ const AppRoutes = () => {
       <Route
         path="/Bookings"
         element={isLoggedIn ? <Bookings /> : <Signin />}
+      />
+      <Route
+        path="/BookingDetails"
+        element={isLoggedIn ? <BookingsDetails /> : <Signin />}
       />
       <Route
         path="/CreateEditCar"
