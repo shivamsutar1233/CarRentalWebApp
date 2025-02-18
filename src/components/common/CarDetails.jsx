@@ -1,12 +1,20 @@
 import { Grid2, List, ListItem, Typography } from "@mui/material";
 import React from "react";
 import StyledCarousel from "./Carousel";
+import Render3DModel from "./Render3DModel";
 
 const CarDetails = ({ data, images }) => {
+  const CarouselItem = (item) => {
+    return <Render3DModel name={item?.heading} />;
+  };
   return (
     <Grid2 container>
       <Grid2 size={{ md: 8 }}>
-        <StyledCarousel data={images} interval={null} />
+        <StyledCarousel
+          data={images}
+          interval={null}
+          CarouselItem={CarouselItem}
+        />
       </Grid2>
       <Grid2>
         <Typography variant="p" className=" p-3 font-semibold">

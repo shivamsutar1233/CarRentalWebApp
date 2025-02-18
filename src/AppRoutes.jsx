@@ -16,6 +16,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { userRoles } from "./util/UIConstants";
 import BookingsDetails from "./pages/BookingDetails";
+import Dashboard from "./pages/Dashboard";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => state?.globalState?.isLoggedIn);
@@ -69,6 +70,18 @@ const AppRoutes = () => {
         element={
           isLoggedIn && roles?.includes(userRoles.admin) ? (
             <CreateEditCar />
+          ) : (
+            <Unauthorized />
+          )
+        }
+      />
+      <Route
+        path="/Dashboard"
+        element={
+          isLoggedIn &&
+          (roles?.includes(userRoles.admin) ||
+            roles?.includes(userRoles.owner)) ? (
+            <Dashboard />
           ) : (
             <Unauthorized />
           )

@@ -112,8 +112,6 @@ function App() {
             <Navbar setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
           </section>
           <AppRoutes />
-          <Divider />
-          <Footer />
         </Fragment>
       )}
     </ThemeProvider>

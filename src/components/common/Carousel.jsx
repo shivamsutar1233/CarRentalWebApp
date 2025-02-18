@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Render3DModel from "./Render3DModel";
 import { Image } from "react-bootstrap";
 import { Typography } from "@mui/material";
-export default function StyledCarousel({ data, interval }) {
+export default function StyledCarousel(props) {
   const [index, setIndex] = useState(0);
-
+  const { data, interval, CarouselItem } = props;
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
@@ -15,7 +15,7 @@ export default function StyledCarousel({ data, interval }) {
     return (
       <Carousel.Item key={item.heading} interval={10000}>
         <section className=" w-full object-cover aspect-video ">
-          <Render3DModel name={item.heading} />
+          <CarouselItem {...item} />
         </section>
         <Carousel.Caption>
           <Typography variant="h5">{item.heading}</Typography>
