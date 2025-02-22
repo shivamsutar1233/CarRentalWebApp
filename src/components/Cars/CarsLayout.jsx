@@ -6,6 +6,8 @@ import CreateEditCarModal from "./CreateEditCarModal";
 import CreateEditCar from "./CreateEditCar";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { useSelector } from "react-redux";
+import { userRoles } from "../../util/UIConstants";
 const CarsLayout = ({
   isLoading,
   data,
@@ -15,6 +17,9 @@ const CarsLayout = ({
   title = "",
 }) => {
   const navigate = useNavigate();
+  const roles = useSelector(
+    (state) => state?.globalState?.userPreferences?.roles
+  );
   const [searchText, setSearchText] = useState("");
   const [filtredCars, setFilteredCars] = useState([]);
   // const [open, setOpen] = useState(false);
@@ -96,17 +101,20 @@ const CarsLayout = ({
           onEnter={handleSearch}
           onClear={handleSearchClear}
         />
-        <Button
-          startIcon={<AddCircleOutlineIcon fontSize="inherit" />}
-          onClick={() => {
-            setIsEdit(false);
-            setOpen(true);
-          }}
-          sx={{ textTransform: "none" }}
-          size="small"
-        >
-          Add Car
-        </Button>
+        {(roles?.includes(userRoles.admin) ||
+          roles?.includes(userRoles.owner)) && (
+          <Button
+            startIcon={<AddCircleOutlineIcon fontSize="inherit" />}
+            onClick={() => {
+              setIsEdit(false);
+              setOpen(true);
+            }}
+            sx={{ textTransform: "none" }}
+            size="small"
+          >
+            Add Car
+          </Button>
+        )}
       </section>
       <section className="grid grid-cols-12 gap-y-5 sm:gap-10">
         {isLoading
