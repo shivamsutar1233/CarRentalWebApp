@@ -57,7 +57,6 @@ const BookingLayout = ({ data, isLoading }) => {
       initialState={{ pagination: { paginationModel } }}
       pageSizeOptions={[1, 2, 5, 10, 20]}
       loading={isLoading}
-      compoen
       slotProps={{
         loadingOverlay: {
           variant: "skeleton",
