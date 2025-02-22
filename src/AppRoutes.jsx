@@ -10,7 +10,6 @@ import Bookings from "./pages/Bookings";
 import Profile from "./pages/Profile";
 import CompleteProfile from "./pages/CompleteProfile";
 import Drydock from "./pages/Drydock";
-import CreateEditCar from "./pages/CreateEditCar";
 import Unauthorized from "./pages/Unauthorized";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -65,7 +64,7 @@ const AppRoutes = () => {
         path="/BookingDetails"
         element={isLoggedIn ? <BookingsDetails /> : <Signin />}
       />
-      <Route
+      {/* <Route
         path="/CreateEditCar"
         element={
           isLoggedIn && roles?.includes(userRoles.admin) ? (
@@ -74,7 +73,7 @@ const AppRoutes = () => {
             <Unauthorized />
           )
         }
-      />
+      /> */}
       <Route
         path="/Dashboard"
         element={

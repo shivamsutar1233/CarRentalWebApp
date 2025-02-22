@@ -1,5 +1,5 @@
 import { Box, Divider, IconButton, useTheme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -7,9 +7,17 @@ import styled from "styled-components";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import DeckIcon from "@mui/icons-material/Deck";
 import GroupIcon from "@mui/icons-material/Group";
+import DashboardHeader from "../components/Dashboard/DashboardHeader";
+import Cars from "./Cars";
+import Bookings from "./Bookings";
+import BookingLayout from "../components/Bookings/BookingLayout";
+import OwnerBookings from "../components/Bookings/OwnerBookings";
+import OwnerCars from "../components/Cars/OwnerCars";
+import DriversList from "../components/Users/DriversList";
 const Dashboard = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
+  const [currentOption, setCurrentOption] = useState(1);
   const handleDrawerOpen = (e) => {
     e.stopPropagation();
     setOpen(true);
@@ -18,29 +26,39 @@ const Dashboard = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  console.log(theme);
+
   const navItems = [
     {
       id: 1,
       title: "Dashboard",
       icon: <DashboardIcon />,
+      component: <></>,
     },
     {
       id: 2,
       title: "Bookings",
       icon: <DeckIcon />,
+      component: <OwnerBookings />,
     },
     {
       id: 3,
       title: "Cars",
       icon: <PrecisionManufacturingIcon />,
+      component: <OwnerCars />,
     },
     {
       id: 4,
       title: "Drivers",
       icon: <GroupIcon />,
+      component: <DriversList />,
     },
   ];
+
+  const handleOptionClick = (id) => {
+    setCurrentOption(id);
+    handleDrawerClose();
+  };
+
   return (
     <section className="pt-24 h-screen flex relative">
       {/* Drawer start here */}
@@ -48,14 +66,14 @@ const Dashboard = () => {
       <StyledLeftNav
         onClick={handleDrawerClose}
         className={`${
-          open ? `w-full bg-[${theme.palette.background.paper}] ` : "w-10"
-        } absolute left-0 transition-all duration-500 overflow-hidden h-full !border-r-[solid] border-red-200`}
+          open ? "w-full" : "w-10"
+        } shadow-xl z-10 absolute left-0 transition-all duration-500 overflow-hidden h-full !border-r-[solid] border-red-200`}
       >
         <Box
           sx={{ backgroundColor: theme.palette.background.default }}
           className={`${
             open ? "w-40" : "w-10"
-          } right-border absolute left-0 transition-all duration-500 overflow-hidden h-full `}
+          } absolute left-0 transition-all duration-500 overflow-hidden h-full `}
         >
           <section className=" flex justify-end">
             {!open ? (
@@ -72,7 +90,10 @@ const Dashboard = () => {
             {navItems.map(({ id, title, icon }) => (
               <section key={id} className="flex items-center justify-start ">
                 <section>
-                  <IconButton title={title} onClick={handleDrawerClose}>
+                  <IconButton
+                    title={title}
+                    onClick={() => handleOptionClick(id)}
+                  >
                     {icon}
                   </IconButton>
                 </section>
@@ -83,19 +104,13 @@ const Dashboard = () => {
           </section>
         </Box>
       </StyledLeftNav>
-      <section className="ml-10">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
-        non enim praesent elementum facilisis leo vel. Risus at ultrices mi
-        tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non
-        tellus. Convallis convallis tellus id interdum velit laoreet id donec
-        ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl
-        suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod
-        quis viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet
-        proin fermentum leo. Mauris commodo quis imperdiet massa tincidunt. Cras
-        tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum
-        varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt.
-        Lorem donec massa sapien faucibus et molestie ac.
+      <section className="ml-10 w-full px-2">
+        <DashboardHeader
+          title={navItems.find((item) => item.id === currentOption).title}
+        />
+        <section>
+          {navItems.find((item) => item.id === currentOption).component}
+        </section>
       </section>
     </section>
   );

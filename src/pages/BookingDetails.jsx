@@ -35,7 +35,6 @@ const BookingsDetails = (props) => {
   const dispatch = useDispatch();
   const { data, isLoading } = useGetCarByIdQuery(carId);
   const Booking = useGetBookingByIdQuery(bookingId);
-  console.log("Booking", Booking);
 
   const handleSubmit = (paymentId) => {
     setIsPaymentLoading(false);

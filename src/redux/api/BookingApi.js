@@ -37,6 +37,11 @@ export const bookingApi = createApi({
         url: `/GetBookingById?bookingId=${queryParams}`,
       }),
     }),
+    getAllOwnerBookings: builder.query({
+      query: (queryParams = "") => ({
+        url: `/GetAllBookingsForOwner?${queryParams}`,
+      }),
+    }),
   }),
 });
 
@@ -45,4 +50,5 @@ export const {
   useGetAllBookingsQuery,
   useGetAllUserBookingsQuery,
   useGetBookingByIdQuery,
+  useGetAllOwnerBookingsQuery,
 } = bookingApi;

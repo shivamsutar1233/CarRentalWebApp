@@ -10,19 +10,17 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import {
   useLazyGetCarByIdQuery,
   useSaveCarMutation,
-} from "../redux/api/CarApi";
+} from "../../redux/api/CarApi";
 import { toast } from "react-toastify";
 import { LoadingButton } from "@mui/lab";
-import { carTypes, fuelTypes, transmissionTypes } from "../resources/en-us";
+import { carTypes, fuelTypes, transmissionTypes } from "../../resources/en-us";
 import { useSearchParams } from "react-router";
-import { Fragment, useEffect, useRef, useState } from "react";
-import CarImagePreview from "../components/common/CarImagePreview";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import CarImagePreview from "../common/CarImagePreview";
 import { put } from "@vercel/blob";
-import { fileTypes } from "../util/UIConstants";
+import { fileTypes } from "../../util/UIConstants";
 
-const CreateEditCar = () => {
-  const [searchParams] = useSearchParams();
-  const carId = searchParams.get("carId");
+const CreateEditCar = ({ open, setOpen, carId, isEdit, onClose }) => {
   const inputFileRef = useRef(null);
   const { register, handleSubmit, control, reset, setValue } = useForm({});
   const [getCarById, { isLoading: carLoading, data }] =
@@ -36,7 +34,7 @@ const CreateEditCar = () => {
   };
 
   useEffect(() => {
-    if (!carLoading && carId) {
+    if (isEdit && !carLoading && carId) {
       getCarInfoById();
     }
   }, []);
@@ -77,16 +75,56 @@ const CreateEditCar = () => {
   const loadingSkeleton = () => {
     return (
       <Fragment>
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"5.5rem"} className=" col-span-12 md:col-span-6" />
-        <Skeleton height={"4.5rem"} className=" col-span-12 " />
-        <Skeleton height={"4.5rem"} className=" col-span-12 " />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"5.5rem"}
+          className=" col-span-12 md:col-span-6"
+        />
+        <Skeleton
+          animation="wave"
+          height={"4.5rem"}
+          className=" col-span-12 "
+        />
+        <Skeleton
+          animation="wave"
+          height={"4.5rem"}
+          className=" col-span-12 "
+        />
       </Fragment>
     );
   };
@@ -99,7 +137,7 @@ const CreateEditCar = () => {
           {...register("model", {})}
           className=" flex-1 col-span-12 md:col-span-6"
           required
-          disabled={isLoading}
+          disabled={isLoading || carLoading}
           slotProps={{
             inputLabel: {
               focused: true,
@@ -111,7 +149,7 @@ const CreateEditCar = () => {
           {...register("make", {})}
           className=" flex-1 col-span-12 md:col-span-6"
           required
-          disabled={isLoading}
+          disabled={isLoading || carLoading}
         />
         <Controller
           name="year"
@@ -124,7 +162,7 @@ const CreateEditCar = () => {
                 className=" flex-1 col-span-12 md:col-span-6"
                 required
                 {...register("year", {})}
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
               />
             );
           }}
@@ -139,7 +177,7 @@ const CreateEditCar = () => {
               <Autocomplete
                 disablePortal
                 options={transmissionTypes}
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
                 sx={{ width: "100%" }}
                 onChange={(e, value) => onChange(value.value)}
                 renderInput={(params) => (
@@ -166,7 +204,7 @@ const CreateEditCar = () => {
                 required
                 onChange={(e) => field.onChange(parseInt(e.target.value))}
                 {...register("mileage", {})}
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
               />
             );
           }}
@@ -191,7 +229,7 @@ const CreateEditCar = () => {
                 {...register("pricePerDay", {})}
                 className=" flex-1 col-span-12 md:col-span-6"
                 required
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
               />
             );
           }}
@@ -206,7 +244,7 @@ const CreateEditCar = () => {
               <Autocomplete
                 disablePortal
                 options={fuelTypes}
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
                 sx={{ width: "100%" }}
                 onChange={(e, value) => onChange(value.value)}
                 renderInput={(params) => (
@@ -231,7 +269,7 @@ const CreateEditCar = () => {
               <Autocomplete
                 disablePortal
                 options={carTypes}
-                disabled={isLoading}
+                disabled={isLoading || carLoading}
                 sx={{ width: "100%" }}
                 onChange={(e, value) => onChange(value.value)}
                 renderInput={(params) => (
@@ -252,7 +290,7 @@ const CreateEditCar = () => {
             type="file"
             multiple
             className=" flex-1 col-span-12 md:col-span-6"
-            disabled={isLoading}
+            disabled={isLoading || carLoading}
             ref={inputFileRef}
           />
           <LoadingButton
@@ -284,7 +322,7 @@ const CreateEditCar = () => {
             sx={{ textTransform: "none" }}
             className="w-full"
             loading={isLoading}
-            disabled={isLoading}
+            disabled={isLoading || carLoading}
           >
             Submit
           </LoadingButton>
@@ -292,40 +330,49 @@ const CreateEditCar = () => {
       </Fragment>
     );
   };
+
+  const handleSaveCar = async (data) => {
+    if (uploadedFileNames.length > 0) {
+      data = {
+        ...data,
+        carImages: uploadedFileNames.reduce(
+          (accumulator, currentValue) => [...accumulator, currentValue?.url],
+          []
+        ),
+      };
+    }
+    !isEdit
+      ? await saveCar(data)
+          .then(() => {
+            toast.success("Car saved successfully");
+            reset();
+            setUploadedFileNames([]);
+          })
+          .catch(() => {
+            toast.error("Something went wrong, please try again later");
+          })
+      : await saveCar(data)
+          .then(() => {
+            toast.success("Car saved successfully");
+            reset();
+            setUploadedFileNames([]);
+          })
+          .catch(() => {
+            toast.error("Something went wrong, please try again later");
+          });
+  };
   return (
-    <section className="pt-20  sm:px-6 md:px-12 lg:px-24 xl:48 2xl:px-96 py-6 flex flex-col justify-center gap-6">
+    <React.Fragment>
       <Typography variant="p text-center">
         Please help us to understand your basic car details
       </Typography>
       <form
         className="grid grid-cols-12 gap-6 mt-6 justify-center items-center"
-        onSubmit={handleSubmit(async (data) => {
-          if (uploadedFileNames.length > 0) {
-            data = {
-              ...data,
-              carImages: uploadedFileNames.reduce(
-                (accumulator, currentValue) => [
-                  ...accumulator,
-                  currentValue?.url,
-                ],
-                []
-              ),
-            };
-          }
-          await saveCar(data)
-            .then(() => {
-              toast.success("Car saved successfully");
-              reset();
-              setUploadedFileNames([]);
-            })
-            .catch(() => {
-              toast.error("Something went wrong, please try again later");
-            });
-        })}
+        onSubmit={handleSubmit(handleSaveCar)}
       >
         {carLoading ? loadingSkeleton() : getContent()}
       </form>
-    </section>
+    </React.Fragment>
   );
 };
 

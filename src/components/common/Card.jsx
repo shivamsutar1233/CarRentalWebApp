@@ -17,7 +17,7 @@ import CurrencyRupeeSharpIcon from "@mui/icons-material/CurrencyRupeeSharp";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-const StyledCard = ({ car, handleBooking }) => {
+const StyledCard = ({ car, handleBooking, onEditCarClick }) => {
   const {
     make,
     model,
@@ -119,11 +119,11 @@ const StyledCard = ({ car, handleBooking }) => {
             Book now
           </Button>
           {roles?.includes("Admin") && (
-            <a href={`/CreateEditCar?carId=${id}`} target="_blank">
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </a>
+            // <a href={`/CreateEditCar?carId=${id}`} target="_blank">
+            <IconButton onClick={() => onEditCarClick(id)}>
+              <EditIcon />
+            </IconButton>
+            // </a>
           )}
         </section>
       </CardActions>
