@@ -20,7 +20,7 @@ function Home() {
             interval={1000}
             CarouselItem={CarouselItem}
           />
-          <section className=" h-80">Features</section>
+          {/* <section className=" h-80">Features</section> */}
           <section className="py-24">
             <Testimonials />
           </section>
